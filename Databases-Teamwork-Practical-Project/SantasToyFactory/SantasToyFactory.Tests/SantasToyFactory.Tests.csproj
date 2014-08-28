@@ -6,7 +6,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{BAD82A62-FA6F-4A14-B830-43F150C37ED9}</ProjectGuid>
+    <ProjectGuid>{0CF1FBED-BE0B-4993-ABAB-CC9FEEDA5BD2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SantasToyFactory.Tests</RootNamespace>
@@ -124,7 +124,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SantasToyFactory\SantasToyFactory.csproj">
-      <Project>{40AEDBAF-3412-4700-8EA6-0A7A4B7EB741}</Project>
+      <Project>{CD6F24BD-1924-418E-A8AE-E3EF2566A7A7}</Project>
       <Name>SantasToyFactory</Name>
     </ProjectReference>
   </ItemGroup>

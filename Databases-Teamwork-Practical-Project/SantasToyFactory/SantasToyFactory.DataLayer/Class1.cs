@@ -8,5 +8,7 @@ namespace SantasToyFactory.DataLayer
 {
     public class Class1
     {
+
+
     }
 }

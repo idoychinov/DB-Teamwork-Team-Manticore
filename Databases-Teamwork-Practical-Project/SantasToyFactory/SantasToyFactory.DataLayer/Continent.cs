@@ -6,15 +6,13 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public enum Behaivior
+    public enum Continent
     {
-        Criminal = 0,
-        VeryBad= 1,
-        Bad = 2,
-        Good = 3,
-        VeryGood = 4,
-        Excellent = 5,
-        Angel = 6,
-
+        Europe = 0,
+        Asia = 1,
+        Australia = 2,
+        Africa = 3,
+        NorthAmerica = 4,
+        SouthAmerika = 5
     }
 }

@@ -5,32 +5,32 @@
     using System.Linq;
     using System.Text;
 
-   public  class Town
+    public class Country
     {
+        public ICollection<Town> towns;
 
-       public ICollection<Address> addresses;
-
-         public Town()
+        public Country()
         {
-            this.addresses = new HashSet<Address>();
+            this.towns = new HashSet<Town>();
         }
-
         public int Id { get; set; }
 
         public string Name { get; set; }
 
-        public string PostCode { get; set; }
+        public Continent Continent { get; set; }
 
-        public virtual ICollection<Address> Addresses
+        public virtual ICollection<Town> Towns
         {
             get
             {
-                return this.addresses;
+                return this.towns;
             }
             set
             {
-                this.addresses = value;
+                this.towns = value;
             }
         }
+            
+
     }
 }

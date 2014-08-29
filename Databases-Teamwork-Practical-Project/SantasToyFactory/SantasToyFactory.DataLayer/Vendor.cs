@@ -6,30 +6,30 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public class Delivery
+    public class Vendor
     {
-         public ICollection<Vendor> vendors;
+        public ICollection<Continent> locations;
 
-         public Delivery()
+        public Vendor()
         {
-            this.vendors = new HashSet<Vendor>();
+            this.locations = new HashSet<Continent>();
         }
-
         public int Id { get; set; }
 
-        public DateTime Date { get; set; }
+        public string Name { get; set; }
 
-        public virtual ICollection<Vendor> Vendors
+        public virtual ICollection<Continent> Locations
         {
             get
             {
-                return this.vendors;
+                return this.locations;
             }
             set
             {
-                this.vendors = value;
+                this.locations = value;
             }
         }
+
 
     }
 }

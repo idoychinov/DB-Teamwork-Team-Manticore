@@ -1,14 +1,9 @@
 ﻿namespace SantasToyFactory.ConsoleClient
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using SantasToyFactory.DataLayer;
     using SantasToyFactory.Models;
     using System.Data.Entity;
     using SantasToyFactory.Models.Migrations;
+    using SantasToyFactory.DataLayer;
 
     public class Program
     {
@@ -16,10 +11,8 @@
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<SantasToyFactorySqlContext, Configuration>());
             var db = new SantasToyFactorySqlContext();
-            
-            var toy = new Toy();
-            db.Toys.Add(toy);
-            db.SaveChanges();
+
         }
     }
 }
+//http://content.time.com/time/specials/packages/completelist/0,29569,2049243,00.html

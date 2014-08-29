@@ -6,10 +6,18 @@
     {
         public ICollection<Continent> locations;
 
+
         public Vendor()
         {
             this.locations = new HashSet<Continent>();
         }
+
+        //public Vendor(string name)
+        //    : this()
+        //{
+        //    this.Name = name;
+        //}
+
         public int Id { get; set; }
 
         public string Name { get; set; }

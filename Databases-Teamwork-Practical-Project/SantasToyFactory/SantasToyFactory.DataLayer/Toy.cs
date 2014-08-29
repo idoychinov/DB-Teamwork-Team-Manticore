@@ -8,6 +8,14 @@ namespace SantasToyFactory.DataLayer
 {
     public class Toy
     {
+        public ICollection<Vendor> vendors;
+
+         public Toy()
+        {
+            this.vendors = new HashSet<Vendor>();
+        }
+
+
         public int Id { get; set; }
 
         public string Name { get; set; }
@@ -16,6 +24,17 @@ namespace SantasToyFactory.DataLayer
 
         public ProductType ProductTypeId { get; set; }
 
-        public virtual ICollection<Vendor> Vendors { get; set; }
+        public virtual ICollection<Vendor> Vendors
+        {
+            get
+            {
+                return this.vendors;
+            }
+            set
+            {
+                this.vendors = value;
+            }
+        }
+
     }
 }

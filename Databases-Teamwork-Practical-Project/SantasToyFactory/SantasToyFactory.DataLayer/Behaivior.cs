@@ -1,11 +1,5 @@
 ﻿namespace SantasToyFactory.DataLayer
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-
     public enum Behaivior
     {
         Criminal = 0,
@@ -15,6 +9,5 @@
         VeryGood = 4,
         Excellent = 5,
         Angel = 6,
-
     }
 }

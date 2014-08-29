@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace SantasToyFactory.DataLayer
 {
-    public class Class1
+
+    public class Location
     {
+        public int Id { get; set; }
 
-
+        public string Name { get; set; }
     }
 }

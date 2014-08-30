@@ -16,7 +16,7 @@
 
         public string Name { get; set; }
 
-        public ICollection<Delivery> Deliverys
+        public virtual ICollection<Delivery> Deliverys
         {
             get
             {

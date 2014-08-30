@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B4891F28-9FDE-460F-9C72-825FE1C0EE6E}</ProjectGuid>
+    <ProjectGuid>{87E22AF7-B06F-4280-9697-7B0366BB2297}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SantasToyFactory.DataLayer</RootNamespace>
@@ -33,8 +33,7 @@
     <Reference Include="DotNetOpenAuth.Core">
       <HintPath>..\packages\DotNetOpenAuth.Core.4.1.4.12333\lib\net45-full\DotNetOpenAuth.Core.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -51,23 +50,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Address.cs" />
-    <Compile Include="Behaivior.cs" />
-    <Compile Include="Country.cs" />
-    <Compile Include="Delivery.cs" />
-    <Compile Include="GroupAge.cs" />
-    <Compile Include="Continent.cs" />
-    <Compile Include="Person.cs" />
-    <Compile Include="Producer.cs" />
-    <Compile Include="ToyType.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Town.cs" />
-    <Compile Include="Toy.cs" />
-    <Compile Include="Vendor.cs" />
+    <Compile Include="SantasToyFactorySqlContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SantasToyFactory.DataLayer\SantasToyFactory.Models.csproj">
+      <Project>{b4891f28-9fde-460f-9c72-825fe1c0ee6e}</Project>
+      <Name>SantasToyFactory.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

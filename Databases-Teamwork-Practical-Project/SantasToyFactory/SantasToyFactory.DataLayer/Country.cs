@@ -1,4 +1,4 @@
-﻿namespace SantasToyFactory.DataLayer
+﻿namespace SantasToyFactory.Models
 {
     using System;
     using System.Collections.Generic;

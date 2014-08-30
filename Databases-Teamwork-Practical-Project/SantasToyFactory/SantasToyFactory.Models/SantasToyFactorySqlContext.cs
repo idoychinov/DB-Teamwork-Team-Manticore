@@ -1,4 +1,4 @@
-﻿using SantasToyFactory.DataLayer;
+﻿using SantasToyFactory.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SantasToyFactory.Models
+namespace SantasToyFactory.DataLayer
 {
     public class SantasToyFactorySqlContext : DbContext
     {
@@ -21,7 +21,7 @@ namespace SantasToyFactory.Models
 
         public IDbSet<Delivery> Deliveries { get; set; }
 
-        public IDbSet<Person> Persons { get; set; }
+        public IDbSet<Child> Persons { get; set; }
 
         public IDbSet<ToyType> ProductTypes { get; set; }
 
@@ -29,7 +29,7 @@ namespace SantasToyFactory.Models
 
         public IDbSet<Toy> Toys { get; set; }
 
-        public IDbSet<Vendor> Vendors { get; set; }
+        public IDbSet<Deliverer> Vendors { get; set; }
 
         public IDbSet<Producer> Producers { get; set; }
     }

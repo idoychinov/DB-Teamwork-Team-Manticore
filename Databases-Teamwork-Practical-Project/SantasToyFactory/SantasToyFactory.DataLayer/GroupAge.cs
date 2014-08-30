@@ -1,4 +1,4 @@
-﻿namespace SantasToyFactory.DataLayer
+﻿namespace SantasToyFactory.Models
 {
     public enum  GroupAge
     {
@@ -7,8 +7,5 @@
        Toddler = 2,
        Child = 3,
        Teen = 4,
-       Adult = 5,
-       Senior = 6,
-       GoldenOldie = 7
     }
 }

@@ -1,11 +1,11 @@
-namespace SantasToyFactory.Models.Migrations
+namespace SantasToyFactory.DataLayer.Migrations
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    using SantasToyFactory.DataLayer;
+    using SantasToyFactory.Models;
 
     public sealed class Configuration : DbMigrationsConfiguration<SantasToyFactorySqlContext>
     {
@@ -55,55 +55,55 @@ namespace SantasToyFactory.Models.Migrations
             context.SaveChanges();
 
 
-            var reindeerDasher = new Vendor()
+            var reindeerDasher = new Deliverer()
             {
                 Name = "Dasher"
             };
             context.Vendors.Add(reindeerDasher);
 
-            var reindeerDancer = new Vendor()
+            var reindeerDancer = new Deliverer()
             {
                 Name = "Dancer"
             };
             context.Vendors.Add(reindeerDancer);
 
-            var reindeerPrancer = new Vendor()
+            var reindeerPrancer = new Deliverer()
             {
                 Name = "Prancer"
             };
             context.Vendors.Add(reindeerPrancer);
 
-            var reindeerVixen = new Vendor()
+            var reindeerVixen = new Deliverer()
             {
                 Name = "Vixen"
             };
             context.Vendors.Add(reindeerVixen);
 
-            var reindeerComet = new Vendor()
+            var reindeerComet = new Deliverer()
             {
                 Name = "Comet"
             };
             context.Vendors.Add(reindeerComet);
 
-            var reindeerCupid = new Vendor()
+            var reindeerCupid = new Deliverer()
             {
                 Name = "Cupid"
             };
             context.Vendors.Add(reindeerCupid);
 
-            var reindeerDunder = new Vendor()
+            var reindeerDunder = new Deliverer()
             {
                 Name = "Dunder"
             };
             context.Vendors.Add(reindeerDunder);
 
-            var reindeerRudolph = new Vendor()
+            var reindeerRudolph = new Deliverer()
             {
                 Name = "Rudolph"
             };
             context.Vendors.Add(reindeerRudolph);
 
-            var santaClause = new Vendor()
+            var santaClause = new Deliverer()
             {
                 Name = "Santa Clause"
             };

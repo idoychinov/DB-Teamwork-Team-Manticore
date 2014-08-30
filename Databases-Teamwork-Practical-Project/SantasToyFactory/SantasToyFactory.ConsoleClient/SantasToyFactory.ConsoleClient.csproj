@@ -60,13 +60,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SantasToyFactory.DataLayer\SantasToyFactory.DataLayer.csproj">
+    <ProjectReference Include="..\SantasToyFactory.DataLayer\SantasToyFactory.Models.csproj">
       <Project>{b4891f28-9fde-460f-9c72-825fe1c0ee6e}</Project>
-      <Name>SantasToyFactory.DataLayer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SantasToyFactory.Models\SantasToyFactory.Models.csproj">
-      <Project>{87e22af7-b06f-4280-9697-7b0366bb2297}</Project>
       <Name>SantasToyFactory.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SantasToyFactory.Models\SantasToyFactory.DataLayer.csproj">
+      <Project>{87e22af7-b06f-4280-9697-7b0366bb2297}</Project>
+      <Name>SantasToyFactory.DataLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

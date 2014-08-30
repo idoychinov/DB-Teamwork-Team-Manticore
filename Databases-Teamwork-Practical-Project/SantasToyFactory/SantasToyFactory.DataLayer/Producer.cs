@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SantasToyFactory.DataLayer
+namespace SantasToyFactory.Models
 {
     public class Producer
     {
@@ -12,7 +12,7 @@ namespace SantasToyFactory.DataLayer
 
         public Producer ()
         {
-           
+            this.toys = new HashSet<Toy>();
         }
 
         public int Id { get; set; }

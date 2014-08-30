@@ -1,4 +1,4 @@
-﻿namespace SantasToyFactory.DataLayer
+﻿namespace SantasToyFactory.Models
 {
     public enum Behaivior
     {

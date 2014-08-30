@@ -1,30 +1,33 @@
-﻿namespace SantasToyFactory.DataLayer
+﻿namespace SantasToyFactory.Models
 {
     using System;
     using System.Collections.Generic;
 
     public class Delivery
     {
-         public ICollection<Vendor> vendors;
+         private ICollection<Child> children;
 
          public Delivery()
         {
-            this.vendors = new HashSet<Vendor>();
+            this.children = new HashSet<Child>();
         }
 
         public int Id { get; set; }
 
-        public DateTime Date { get; set; }
+        public int YearId { get; set; }
 
-        public virtual ICollection<Vendor> Vendors
+        public int VendorId { get; set; }
+      
+
+        public virtual ICollection<Child> Children
         {
             get
             {
-                return this.vendors;
+                return this.children;
             }
             set
             {
-                this.vendors = value;
+                this.children = value;
             }
         }
 

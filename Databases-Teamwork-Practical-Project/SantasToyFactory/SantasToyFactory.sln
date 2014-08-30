@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SantasToyFactory.DataLayer", "SantasToyFactory.DataLayer\SantasToyFactory.DataLayer.csproj", "{B4891F28-9FDE-460F-9C72-825FE1C0EE6E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SantasToyFactory.Models", "SantasToyFactory.DataLayer\SantasToyFactory.Models.csproj", "{B4891F28-9FDE-460F-9C72-825FE1C0EE6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SantasToyFactory.Models", "SantasToyFactory.Models\SantasToyFactory.Models.csproj", "{87E22AF7-B06F-4280-9697-7B0366BB2297}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SantasToyFactory.DataLayer", "SantasToyFactory.Models\SantasToyFactory.DataLayer.csproj", "{87E22AF7-B06F-4280-9697-7B0366BB2297}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SantasToyFactory.Repositories", "SantasToyFactory.Repositories\SantasToyFactory.Repositories.csproj", "{3EBAAC5F-3E28-4724-8361-E3CEF0143367}"
 EndProject

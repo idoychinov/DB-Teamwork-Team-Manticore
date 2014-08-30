@@ -2,7 +2,7 @@
 {
     using SantasToyFactory.Models;
     using System.Data.Entity;
-    using SantasToyFactory.Models.Migrations;
+    using SantasToyFactory.DataLayer.Migrations;
     using SantasToyFactory.DataLayer;
     using System;
 
@@ -15,7 +15,7 @@
           //  db.Database.ExecuteSqlCommand("DELETE FROM Producers");
           //  db.Database.ExecuteSqlCommand("DELETE FROM Vendors");
 
-            //Console.WriteLine(db.Vendors.Find(1));
+            Console.WriteLine(db.Vendors.Find(1));
             db.SaveChanges();
         }
     }

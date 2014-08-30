@@ -4,7 +4,6 @@
 
     public  class Town
     {
-
        public ICollection<Address> addresses;
 
          public Town()

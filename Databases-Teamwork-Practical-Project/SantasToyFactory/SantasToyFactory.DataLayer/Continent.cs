@@ -2,12 +2,11 @@
 {
     public enum Continent
     {
-        Europe = 1,
-        Asia = 2,
-        Australia = 3,
-        Africa = 4,
-        NorthAmerica = 5,
-        SouthAmerika = 6
-
+        Europeshape = 1,
+        Asiastone = 2,
+        Australiasence = 3,
+        Africawhite = 4,
+        NorthAmericalake = 5,
+        SouthAmerikapearle = 6
     }
 }

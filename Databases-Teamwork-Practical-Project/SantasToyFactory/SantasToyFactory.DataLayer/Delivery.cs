@@ -5,9 +5,9 @@
 
     public class Delivery
     {
-         private ICollection<Child> children;
+        private ICollection<Child> children;
 
-         public Delivery()
+        public Delivery()
         {
             this.children = new HashSet<Child>();
         }
@@ -17,7 +17,8 @@
         public int YearId { get; set; }
 
         public int DelivererId { get; set; }
-      
+
+
         public virtual ICollection<Child> Children
         {
             get

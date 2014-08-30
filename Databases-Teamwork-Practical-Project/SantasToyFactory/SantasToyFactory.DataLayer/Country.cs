@@ -30,7 +30,5 @@
                 this.towns = value;
             }
         }
-            
-
     }
 }

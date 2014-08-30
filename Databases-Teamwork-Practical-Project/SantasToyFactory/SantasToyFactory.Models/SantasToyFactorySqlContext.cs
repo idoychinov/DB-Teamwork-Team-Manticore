@@ -23,12 +23,14 @@ namespace SantasToyFactory.Models
 
         public IDbSet<Person> Persons { get; set; }
 
-        public IDbSet<ProductType> ProductTypes { get; set; }
+        public IDbSet<ToyType> ProductTypes { get; set; }
 
         public IDbSet<Town> Towns { get; set; }
 
         public IDbSet<Toy> Toys { get; set; }
 
         public IDbSet<Vendor> Vendors { get; set; }
+
+        public IDbSet<Producer> Producers { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace SantasToyFactory.DataLayer
 {
-    public class ProductType
+    public class ToyType
     {
         public int Id { get; set; }
 

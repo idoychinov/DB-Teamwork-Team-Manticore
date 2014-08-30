@@ -17,40 +17,91 @@ namespace SantasToyFactory.Models.Migrations
 
         protected override void Seed(SantasToyFactorySqlContext context)
         {
-            if(context.Vendors.Any())
+             if (context.Producers.Any() && context.Vendors.Any())
             {
                 return;
             }
 
-            var elfAlabaster = new Vendor()
+            var elfAlabaster = new Producer()
                 {
                     Name = "Alabaster Snowball"
                 };
-            context.Vendors.Add(elfAlabaster);
+            context.Producers.Add(elfAlabaster);
 
-            var elfBushy = new Vendor()
+            var elfBushy = new Producer()
                 {
                     Name = "Bushy Evergreen"
                 };
-            context.Vendors.Add(elfBushy);
+            context.Producers.Add(elfBushy);
 
-            var elfPepper = new Vendor()
+            var elfPepper = new Producer()
             {
                 Name = "Pepper Minstix"
             };
-            context.Vendors.Add(elfPepper);
+            context.Producers.Add(elfPepper);
 
-            var elfShinny = new Vendor()
+            var elfShinny = new Producer()
             {
                 Name = "Shinny Upatree"
             };
-            context.Vendors.Add(elfShinny);
+            context.Producers.Add(elfShinny);
 
-            var elfSugarplum = new Vendor()
+            var elfSugarplum = new Producer()
             {
                 Name = "Sugarplum Mary "
             };
-            context.Vendors.Add(elfSugarplum);
+            context.Producers.Add(elfSugarplum);
+
+            context.SaveChanges();
+
+
+            var reindeerDasher = new Vendor()
+            {
+                Name = "Dasher"
+            };
+            context.Vendors.Add(reindeerDasher);
+
+            var reindeerDancer = new Vendor()
+            {
+                Name = "Dancer"
+            };
+            context.Vendors.Add(reindeerDancer);
+
+            var reindeerPrancer = new Vendor()
+            {
+                Name = "Prancer"
+            };
+            context.Vendors.Add(reindeerPrancer);
+
+            var reindeerVixen = new Vendor()
+            {
+                Name = "Vixen"
+            };
+            context.Vendors.Add(reindeerVixen);
+
+            var reindeerComet = new Vendor()
+            {
+                Name = "Comet"
+            };
+            context.Vendors.Add(reindeerComet);
+
+            var reindeerCupid = new Vendor()
+            {
+                Name = "Cupid"
+            };
+            context.Vendors.Add(reindeerCupid);
+
+            var reindeerDunder = new Vendor()
+            {
+                Name = "Dunder"
+            };
+            context.Vendors.Add(reindeerDunder);
+
+            var reindeerRudolph = new Vendor()
+            {
+                Name = "Rudolph"
+            };
+            context.Vendors.Add(reindeerRudolph);
 
             var santaClause = new Vendor()
             {

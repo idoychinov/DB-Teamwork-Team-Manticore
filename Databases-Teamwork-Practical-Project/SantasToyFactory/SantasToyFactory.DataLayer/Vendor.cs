@@ -1,15 +1,17 @@
 ﻿namespace SantasToyFactory.DataLayer
 {
-    using System.Collections.Generic;
+    using System;
+using System.Collections.Generic;
 
     public class Vendor
     {
-        public ICollection<Continent> locations;
-
+        private ICollection<Continent> locations;
+        private ICollection<Delivery> delivery;
 
         public Vendor()
         {
             this.locations = new HashSet<Continent>();
+            this.delivery = new HashSet<Delivery>();
         }
 
         //public Vendor(string name)
@@ -21,6 +23,18 @@
         public int Id { get; set; }
 
         public string Name { get; set; }
+
+        public ICollection<Delivery> Deliverys
+        {
+            get
+            {
+                return this.delivery;
+            }
+            set
+            {
+                this.delivery = value;
+            }
+        }
 
         public virtual ICollection<Continent> Locations
         {

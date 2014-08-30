@@ -18,7 +18,7 @@
 
         public decimal Price { get; set; }
 
-        public ProductType ProductTypeId { get; set; }
+        public ToyType ProductTypeId { get; set; }
 
         public virtual ICollection<Vendor> Vendors
         {

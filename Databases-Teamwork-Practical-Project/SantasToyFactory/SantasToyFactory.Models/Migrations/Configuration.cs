@@ -17,7 +17,7 @@ namespace SantasToyFactory.DataLayer.Migrations
 
         protected override void Seed(SantasToyFactorySqlContext context)
         {
-             if (context.Producers.Any() && context.Vendors.Any())
+            if (context.Producers.Any() && context.Deliverers.Any())
             {
                 return;
             }
@@ -59,55 +59,55 @@ namespace SantasToyFactory.DataLayer.Migrations
             {
                 Name = "Dasher"
             };
-            context.Vendors.Add(reindeerDasher);
+            context.Deliverers.Add(reindeerDasher);
 
             var reindeerDancer = new Deliverer()
             {
                 Name = "Dancer"
             };
-            context.Vendors.Add(reindeerDancer);
+            context.Deliverers.Add(reindeerDancer);
 
             var reindeerPrancer = new Deliverer()
             {
                 Name = "Prancer"
             };
-            context.Vendors.Add(reindeerPrancer);
+            context.Deliverers.Add(reindeerPrancer);
 
             var reindeerVixen = new Deliverer()
             {
                 Name = "Vixen"
             };
-            context.Vendors.Add(reindeerVixen);
+            context.Deliverers.Add(reindeerVixen);
 
             var reindeerComet = new Deliverer()
             {
                 Name = "Comet"
             };
-            context.Vendors.Add(reindeerComet);
+            context.Deliverers.Add(reindeerComet);
 
             var reindeerCupid = new Deliverer()
             {
                 Name = "Cupid"
             };
-            context.Vendors.Add(reindeerCupid);
+            context.Deliverers.Add(reindeerCupid);
 
             var reindeerDunder = new Deliverer()
             {
                 Name = "Dunder"
             };
-            context.Vendors.Add(reindeerDunder);
+            context.Deliverers.Add(reindeerDunder);
 
             var reindeerRudolph = new Deliverer()
             {
                 Name = "Rudolph"
             };
-            context.Vendors.Add(reindeerRudolph);
+            context.Deliverers.Add(reindeerRudolph);
 
             var santaClause = new Deliverer()
             {
                 Name = "Santa Clause"
             };
-            context.Vendors.Add(santaClause);
+            context.Deliverers.Add(santaClause);
 
             context.SaveChanges();
         }

@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
 
-        public string Type { get; set; }
+        public GroupAge GroupAgeId { get; set; }
 
         public string AdditionalInfo { get; set; }
     }

@@ -16,9 +16,8 @@
 
         public int YearId { get; set; }
 
-        public int VendorId { get; set; }
+        public int DelivererId { get; set; }
       
-
         public virtual ICollection<Child> Children
         {
             get

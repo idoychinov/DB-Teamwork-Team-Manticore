@@ -2,12 +2,12 @@
 {
     public enum Behaivior
     {
-        Criminal = 0,
-        VeryBad= 1,
-        Bad = 2,
-        Good = 3,
-        VeryGood = 4,
-        Excellent = 5,
-        Angel = 6,
+        Criminal = 1,
+        VeryBad= 2,
+        Bad = 3,
+        Good = 4,
+        VeryGood = 5,
+        Excellent = 6,
+        Angel = 7,
     }
 }

@@ -21,15 +21,15 @@ namespace SantasToyFactory.DataLayer
 
         public IDbSet<Delivery> Deliveries { get; set; }
 
-        public IDbSet<Child> Persons { get; set; }
+        public IDbSet<Child> Children { get; set; }
 
-        public IDbSet<ToyType> ProductTypes { get; set; }
+        public IDbSet<ToyType> ToyTypes { get; set; }
 
         public IDbSet<Town> Towns { get; set; }
 
         public IDbSet<Toy> Toys { get; set; }
 
-        public IDbSet<Deliverer> Vendors { get; set; }
+        public IDbSet<Deliverer> Deliverers { get; set; }
 
         public IDbSet<Producer> Producers { get; set; }
     }

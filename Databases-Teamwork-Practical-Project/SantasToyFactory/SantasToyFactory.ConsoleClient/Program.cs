@@ -13,9 +13,9 @@
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<SantasToyFactorySqlContext, Configuration>());
             var db = new SantasToyFactorySqlContext();
           //  db.Database.ExecuteSqlCommand("DELETE FROM Producers");
-          //  db.Database.ExecuteSqlCommand("DELETE FROM Vendors");
+          //  db.Database.ExecuteSqlCommand("DELETE FROM Deliverers");
 
-            Console.WriteLine(db.Vendors.Find(1));
+            Console.WriteLine(db.Deliverers.Find(1));
             db.SaveChanges();
         }
     }

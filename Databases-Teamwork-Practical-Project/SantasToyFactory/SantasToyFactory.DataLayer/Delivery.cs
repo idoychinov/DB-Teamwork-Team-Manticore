@@ -18,7 +18,6 @@
 
         public int DelivererId { get; set; }
 
-
         public virtual ICollection<Child> Children
         {
             get

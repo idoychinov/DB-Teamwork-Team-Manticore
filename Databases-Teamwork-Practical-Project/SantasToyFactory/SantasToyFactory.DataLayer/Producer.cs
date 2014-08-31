@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SantasToyFactory.Models
+﻿namespace SantasToyFactory.Models
 {
+    using System.Collections.Generic;
+
     public class Producer
     {
         private ICollection<Toy> toys;

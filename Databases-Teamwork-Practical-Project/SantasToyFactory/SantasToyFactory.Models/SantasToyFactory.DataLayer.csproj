@@ -50,9 +50,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ISantasToyFactorySqlContext.cs" />
+    <Compile Include="ISantasToyFactoryDatabase.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\AddressesRepository.cs" />
+    <Compile Include="Repositories\ChildrenRepository.cs" />
+    <Compile Include="Repositories\CountriesRepository.cs" />
+    <Compile Include="Repositories\DeliverersRepository.cs" />
+    <Compile Include="Repositories\DeliveriesRepository.cs" />
+    <Compile Include="Repositories\GenericRepository.cs" />
+    <Compile Include="Repositories\IGenericRepository.cs" />
+    <Compile Include="Repositories\ProducersRepository.cs" />
+    <Compile Include="Repositories\TownsRepository.cs" />
+    <Compile Include="Repositories\ToysRepository.cs" />
+    <Compile Include="Repositories\ToyTypesRepository.cs" />
     <Compile Include="SantasToyFactorySqlContext.cs" />
+    <Compile Include="SantasToyFactoryDatabase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

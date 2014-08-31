@@ -1,19 +1,16 @@
-﻿using SantasToyFactory.Models;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SantasToyFactory.DataLayer
+﻿namespace SantasToyFactory.DataLayer
 {
-    public class SantasToyFactorySqlContext : DbContext
+    using System.Data.Entity;
+
+    using SantasToyFactory.DataLayer.Migrations;
+    using SantasToyFactory.Models;
+
+    public class SantasToyFactorySqlContext : DbContext, ISantasToyFactorySqlContext
     {
         public SantasToyFactorySqlContext()
             : base("SantasToyFactoryDB")
         {
-
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<SantasToyFactorySqlContext, Configuration>());
         }
         public IDbSet<Address> Addresses { get; set; }
 
@@ -32,5 +29,15 @@ namespace SantasToyFactory.DataLayer
         public IDbSet<Deliverer> Deliverers { get; set; }
 
         public IDbSet<Producer> Producers { get; set; }
+
+        public new IDbSet<T> Set<T>() where T : class
+        {
+            return base.Set<T>();
+        }
+
+        public new void SaveChanges()
+        {
+            base.SaveChanges();
+        }
     }
 }

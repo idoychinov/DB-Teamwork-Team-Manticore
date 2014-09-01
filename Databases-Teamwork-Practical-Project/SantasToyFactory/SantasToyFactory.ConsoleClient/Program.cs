@@ -1,7 +1,10 @@
 ﻿namespace SantasToyFactory.ConsoleClient
 {
-    using SantasToyFactory.DataLayer;
     using System;
+
+
+    using SantasToyFactory.DataLayer;
+    using SantasToyFactory.DataOperations;
 
     public class Program
     {
@@ -11,6 +14,9 @@
 
             Console.WriteLine(db.Deliverers.SearchFor(d=> d.Id == 1));
             db.SaveChanges();
+
+            var excelFiles = ZipManipulator.ExtractFile(@"C:\Users\Stefan\Documents\GitHub\DB-Teamwork-Team-Manticore\Deliveries.zip", @"D:\Deliveries\");
+            ExcelManipulator.AddExcelInfoToDatabase("Server = .; Database = SantasToyFactoryDb; Integrated Security = true", excelFiles);
         }
     }
 }

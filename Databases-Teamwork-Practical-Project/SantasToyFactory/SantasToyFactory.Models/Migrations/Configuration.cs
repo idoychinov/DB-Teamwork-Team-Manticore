@@ -46,7 +46,7 @@ namespace SantasToyFactory.DataLayer.Migrations
 
             var elfSugarplum = new Producer()
             {
-                Name = "Sugarplum Mary "
+                Name = "Sugarplum Mary"
             };
             context.Producers.Add(elfSugarplum);
 

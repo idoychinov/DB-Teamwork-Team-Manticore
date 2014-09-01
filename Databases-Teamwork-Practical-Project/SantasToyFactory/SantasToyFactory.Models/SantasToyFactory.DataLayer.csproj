@@ -71,6 +71,7 @@
     <Compile Include="Repositories\TownsRepository.cs" />
     <Compile Include="Repositories\ToysRepository.cs" />
     <Compile Include="Repositories\ToyTypesRepository.cs" />
+    <Compile Include="SantasToyFactoryMongoData.cs" />
     <Compile Include="SantasToyFactorySqlContext.cs" />
     <Compile Include="SantasToyFactoryDatabase.cs" />
   </ItemGroup>
@@ -82,6 +83,10 @@
     <ProjectReference Include="..\SantasToyFactory.DataLayer\SantasToyFactory.Models.csproj">
       <Project>{b4891f28-9fde-460f-9c72-825fe1c0ee6e}</Project>
       <Name>SantasToyFactory.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SantasToyFactory.DataOperations\SantasToyFactory.DataOperations.csproj">
+      <Project>{9eb64dcf-3e32-491b-b549-df8d89008e39}</Project>
+      <Name>SantasToyFactory.DataOperations</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

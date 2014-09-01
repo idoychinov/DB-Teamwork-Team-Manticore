@@ -73,8 +73,7 @@
 
         private static void InitializeMongo()
         {
-            // TODO: Implement this method
-            throw new NotImplementedException();
+            var mongoDb = new SantasToyFactoryMongoData();
         }
 
         private static void InitializeSQL()

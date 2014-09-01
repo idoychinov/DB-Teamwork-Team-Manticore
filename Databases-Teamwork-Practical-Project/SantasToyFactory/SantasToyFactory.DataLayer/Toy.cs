@@ -16,7 +16,9 @@
 
         public decimal Price { get; set; }
 
-        public ToyType ToyTypeId { get; set; }
+        public int ToyTypeId { get; set; }
+
+        public virtual ToyType ToyType { get; set; }
 
        public virtual ICollection<Child > Children
         {

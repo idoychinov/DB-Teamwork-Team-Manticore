@@ -14,7 +14,9 @@
 
         public string Name { get; set; }
 
-        public Continent Continent { get; set; }
+        public int ContinentId { get; set; }
+
+        public virtual Continent Continent { get; set; }
 
         public virtual ICollection<Town> Towns
         {

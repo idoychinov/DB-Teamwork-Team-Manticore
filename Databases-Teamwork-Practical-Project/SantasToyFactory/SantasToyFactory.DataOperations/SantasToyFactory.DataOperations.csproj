@@ -42,12 +42,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExcelDataReader.cs" />
     <Compile Include="ExcelManipulator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ZipManipulator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SantasToyFactory.DataLayer\SantasToyFactory.Models.csproj">
+      <Project>{b4891f28-9fde-460f-9c72-825fe1c0ee6e}</Project>
+      <Name>SantasToyFactory.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

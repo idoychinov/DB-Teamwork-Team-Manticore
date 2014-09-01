@@ -4,7 +4,8 @@
     {
         public int Id { get; set; }
 
-        public GroupAge GroupAgeId { get; set; }
+        public int GroupAgeId { get; set; }
+        public virtual GroupAge GroupAge { get; set; }
 
         public string AdditionalInfo { get; set; }
     }

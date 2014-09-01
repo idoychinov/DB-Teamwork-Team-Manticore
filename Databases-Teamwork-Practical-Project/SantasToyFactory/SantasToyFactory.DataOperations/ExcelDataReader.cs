@@ -90,7 +90,7 @@
                         {
                             toyType.Id = id;
                             toyType.AdditionalInfo = (string)reader["AdditionalInfo"];
-                            toyType.GroupAgeId = int.Parse(reader["GroupAgeId"].ToString());
+                            toyType.GroupAge = (GroupAge)int.Parse(reader["GroupAgeId"].ToString());
                             toyTypes.Add(toyType);
                         }
                     }
@@ -145,7 +145,7 @@
                             town.Id = id;
                             town.Name = (string)reader["Name"];
                             town.CountryId = int.Parse(reader["CountryId"].ToString());
-                            town.Name = reader["PostCode"].ToString();
+                            town.PostCode = reader["PostCode"].ToString();
                             towns.Add(town);
                         }
                     }
@@ -172,7 +172,7 @@
                         {
                             country.Id = id;
                             country.Name = (string)reader["Name"];
-                            country.ContinentId = int.Parse(reader["ContinentId"].ToString());
+                            country.Continent = (Continent) int.Parse(reader["ContinentId"].ToString());
                             countries.Add(country);
                         }
                     }

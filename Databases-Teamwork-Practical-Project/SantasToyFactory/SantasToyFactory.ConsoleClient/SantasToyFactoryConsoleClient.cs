@@ -1,8 +1,9 @@
 ﻿namespace SantasToyFactory.ConsoleClient
 {
-    using SantasToyFactory.DataLayer;
     using System;
     using System.Linq;
+
+    using SantasToyFactory.DataLayer;
     using SantasToyFactory.DataOperations;
 
     public class SantasToyFactoryConsoleClient
@@ -37,7 +38,8 @@
             {
 
                 // we will make it as linear flow one after another later
-                ConsoleUtilities.MenuMessage("For testing purposes. Press 1 to Initialize SQL server; 2 to Initialize MongoDB 3 to Read Excel");
+                ConsoleUtilities.MenuMessage("For testing purposes. Press 1 to Initialize MongoDB; 2 to Migrate MongoDB to SQL; 3 to Read Excel; 4 to test SQL standalone initialization; "+
+                    "5 to clear data from MongoDb");
                 if (CheckForEsc(out currentKey))
                 {
                     active = false;
@@ -45,23 +47,57 @@
                 }
                 switch (currentKey)
                 {
-
                     case ConsoleKey.NumPad1:
                     case ConsoleKey.D1:
-                        InitializeSQL();
+                        InitializeMongo();
                         break;
                     case ConsoleKey.NumPad2:
                     case ConsoleKey.D2:
-                        InitializeMongo();
+                        MigrateMongoToSql();
                         break;
                     case ConsoleKey.NumPad3:
                     case ConsoleKey.D3:
                         ReadExcel();
                         break;
+                    case ConsoleKey.NumPad4:
+                    case ConsoleKey.D4:
+                        InitializeSQL();
+                        break;
+                    case ConsoleKey.NumPad5:
+                    case ConsoleKey.D5:
+                        var mongoDb = new SantasToyFactoryMongoData();
+                        mongoDb.DropCollectionsFromDatabase();
+                        break;
+                    
                     default:
                         ConsoleUtilities.ErrorMessage("Wrong command. Please try again");
                         break;
                 }
+            }
+        }
+
+        private static void MigrateMongoToSql()
+        {
+            ConsoleUtilities.MenuMessage("Press 1 for SQL Server or any other key for SQL Express");
+            var key = Console.ReadKey();
+            Console.WriteLine();
+            if (key.Key == ConsoleKey.NumPad1 || key.Key == ConsoleKey.D1)
+            {
+                SantasToyFactorySqlContext.InitializeForSqlServer();
+            }
+
+            try
+            {
+                ConsoleUtilities.ProcessingMessage("Beginning data migration from MongoDb to SQL database");
+                var mongoDb = new SantasToyFactoryMongoData();
+                var SqlDb = new SantasToyFactoryDatabase();
+                var migrationControler = new MongoToSqlMigrationController(mongoDb, SqlDb);
+                migrationControler.MigrateDataToSql();
+                ConsoleUtilities.SuccessMessage("Migration completed successfully.");
+            }
+            catch (Exception e)
+            {
+                ConsoleUtilities.ErrorMessage(String.Format("Error during data migration: {0}", e));
             }
         }
 
@@ -73,7 +109,9 @@
 
         private static void InitializeMongo()
         {
+            ConsoleUtilities.ProcessingMessage("Initializing MongoDb database");
             var mongoDb = new SantasToyFactoryMongoData();
+            ConsoleUtilities.SuccessMessage("Database initialized successfully.");
         }
 
         private static void InitializeSQL()

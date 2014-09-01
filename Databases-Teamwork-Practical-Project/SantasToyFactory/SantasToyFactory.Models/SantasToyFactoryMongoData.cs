@@ -7,6 +7,7 @@
     using MongoDB.Driver;
 
     using SantasToyFactory.DataOperations;
+    using SantasToyFactory.Models;
 
     public class SantasToyFactoryMongoData
     {
@@ -81,6 +82,42 @@
         public void DropCollectionsFromDatabase()
         {
             this.db.Drop();
+        }
+
+        public IEnumerable<Toy> GetToys()
+        {
+            var collection = this.db.GetCollection<Toy>(ToysCollectionName).FindAll().AsEnumerable<Toy>();
+            return collection;
+        }
+
+        public IEnumerable<Producer> GetProducers()
+        {
+            var collection = this.db.GetCollection<Producer>(ProducersCollectionName).FindAll().AsEnumerable<Producer>();
+            return collection;
+        }
+
+        public IEnumerable<ToyType> GetToyTypes()
+        {
+            var collection = this.db.GetCollection<ToyType>(ToyTypesName).FindAll().AsEnumerable<ToyType>();
+            return collection;
+        }
+
+        public IEnumerable<Address> GetAddresses()
+        {
+            var collection = this.db.GetCollection<Address>(AddressesName).FindAll().AsEnumerable<Address>();
+            return collection;
+        }
+
+        public IEnumerable<Town> GetTowns()
+        {
+            var collection = this.db.GetCollection<Town>(TownsName).FindAll().AsEnumerable<Town>();
+            return collection;
+        }
+
+        public IEnumerable<Country> GetCountries()
+        {
+            var collection = this.db.GetCollection<Country>(CountriesName).FindAll().AsEnumerable<Country>();
+            return collection;
         }
     }
 }

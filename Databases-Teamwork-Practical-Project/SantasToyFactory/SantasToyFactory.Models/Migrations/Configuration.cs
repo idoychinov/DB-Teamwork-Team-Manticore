@@ -15,43 +15,10 @@ namespace SantasToyFactory.DataLayer.Migrations
 
         protected override void Seed(SantasToyFactorySqlContext context)
         {
-            if (context.Producers.Any() && context.Deliverers.Any())
+            if (context.Deliverers.Any())
             {
                 return;
             }
-
-            var elfAlabaster = new Producer()
-                {
-                    Name = "Alabaster Snowball"
-                };
-            context.Producers.Add(elfAlabaster);
-
-            var elfBushy = new Producer()
-                {
-                    Name = "Bushy Evergreen"
-                };
-            context.Producers.Add(elfBushy);
-
-            var elfPepper = new Producer()
-            {
-                Name = "Pepper Minstix"
-            };
-            context.Producers.Add(elfPepper);
-
-            var elfShinny = new Producer()
-            {
-                Name = "Shinny Upatree"
-            };
-            context.Producers.Add(elfShinny);
-
-            var elfSugarplum = new Producer()
-            {
-                Name = "Sugarplum Mary"
-            };
-            context.Producers.Add(elfSugarplum);
-
-            context.SaveChanges();
-
 
             var reindeerDasher = new Deliverer()
             {

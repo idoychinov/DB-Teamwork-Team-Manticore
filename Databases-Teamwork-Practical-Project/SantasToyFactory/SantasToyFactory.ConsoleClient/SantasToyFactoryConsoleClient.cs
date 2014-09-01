@@ -3,6 +3,7 @@
     using SantasToyFactory.DataLayer;
     using System;
     using System.Linq;
+    using SantasToyFactory.DataOperations;
 
     public class SantasToyFactoryConsoleClient
     {
@@ -66,8 +67,8 @@
 
         private static void ReadExcel()
         {
-            // TODO: Implement this method
-            throw new NotImplementedException();
+            var excelFiles = ZipManipulator.ExtractFile(@"C:\Users\Stefan\Documents\GitHub\DB-Teamwork-Team-Manticore\Deliveries.zip", @"D:\Deliveries\");
+            ExcelManipulator.AddExcelInfoToDatabase("Server = .; Database = SantasToyFactoryDb; Integrated Security = true", excelFiles);
         }
 
         private static void InitializeMongo()
@@ -92,7 +93,7 @@
                 var test = db.Deliverers.SearchFor(d => d.Id == 1).First().Name;
 
                 ConsoleUtilities.SuccessMessage("Database initialized successfully.");
-                Console.WriteLine("First deer name is: ", test);
+                Console.WriteLine("First deer name is: {0}", test);
                 db.SaveChanges();
             }
             catch (Exception e)

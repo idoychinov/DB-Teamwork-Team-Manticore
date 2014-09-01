@@ -7,11 +7,27 @@
 
     public class SantasToyFactorySqlContext : DbContext, ISantasToyFactorySqlContext
     {
+        private const string SqlExpressConnectionName = "SantasToyFactoryDB";
+
+        private const string SqlServerConnectionName = "SantasToyFactoryDBSQLServer";
+
+        private static string defaultConnectionName = SqlExpressConnectionName;
+        
         public SantasToyFactorySqlContext()
-            : base("SantasToyFactoryDB")
+            : base(defaultConnectionName)
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<SantasToyFactorySqlContext, Configuration>());
         }
+
+        public static void InitializeForSqlExpress()
+        {
+            defaultConnectionName = SqlExpressConnectionName;
+        }
+        public static void InitializeForSqlServer()
+        {
+            defaultConnectionName = SqlServerConnectionName;
+        }
+
         public IDbSet<Address> Addresses { get; set; }
 
         public IDbSet<Country> Countries { get; set; }

@@ -8,7 +8,7 @@
     using SantasToyFactory.Models;
 
 
-    public class ExcelDataReader<T> where T : class
+    public class ExcelDataReader//<T> where T : class
     {
         private OleDbConnection connection;
         private string connectionString;

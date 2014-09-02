@@ -37,20 +37,35 @@
             {
                 this.sqlDb.Addresses.Add(item);
             }
+
             var toyTypesCollection = this.mongoDB.GetToyTypes();
             foreach (var item in toyTypesCollection)
             {
                 this.sqlDb.ToyTypes.Add(item);
             }
+
             var produecersCollection = this.mongoDB.GetProducers();
             foreach (var item in produecersCollection)
             {
                 this.sqlDb.Producers.Add(item);
             }
+
             var toysCollection = this.mongoDB.GetToys();
             foreach (var item in toysCollection)
             {
                 this.sqlDb.Toys.Add(item);
+            }
+
+            var childrenCollection = this.mongoDB.GetChildren();
+            foreach (var item in childrenCollection)
+            {
+                this.sqlDb.Children.Add(item);
+            }
+
+            var yearDates = this.mongoDB.GetYearDates();
+            foreach (var item in yearDates)
+            {
+                this.sqlDb.Years.Add(item);
             }
 
             this.sqlDb.SaveChanges();

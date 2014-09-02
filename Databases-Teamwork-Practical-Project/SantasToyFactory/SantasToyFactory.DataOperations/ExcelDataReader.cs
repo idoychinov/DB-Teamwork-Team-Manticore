@@ -95,6 +95,37 @@
             return toys.AsEnumerable<Toy>();
         }
 
+        public IEnumerable<Child> GetChildren(string tableName)
+        {
+            this.connection = new OleDbConnection(connectionString);
+            this.connection.Open();
+            var children = new List<Child>();
+            using (this.connection)
+            {
+                OleDbCommand getTable = new OleDbCommand("SELECT * FROM [" + tableName + "$]", this.connection);
+                using (var reader = getTable.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var child = new Child();
+                        int id;
+                        if (int.TryParse(reader["Id"].ToString(), out id))
+                        {
+                            child.Id = id;
+                            child.Name = (string)reader["Name"];
+                            child.GroupAge = (GroupAge)int.Parse(reader["GroupAgeId"].ToString());
+                            // child.Behaviour = (Behaviour)int.Parse(reader["Behaviour"].ToString());
+                            child.AddressId = int.Parse(reader["AddressId"].ToString());
+                            child.ToyId = int.Parse(reader["ToyId"].ToString());
+                            // child.DelivererId = (Deliverer)int.Parse(reader["DelivererId"].ToString());
+                            children.Add(child);
+                        }
+                    }
+                }
+            }
+            return children.AsEnumerable<Child>();
+        }
+
         public IEnumerable<Producer> GetProducers(string tableName)
         {
             this.connection = new OleDbConnection(connectionString);
@@ -203,6 +234,33 @@
             return towns.AsEnumerable<Town>();
         }
 
+        public IEnumerable<YearDate> GetYears(string tableName)
+        {
+            this.connection = new OleDbConnection(connectionString);
+            this.connection.Open();
+            var years = new List<YearDate>();
+            using (this.connection)
+            {
+                OleDbCommand getTable = new OleDbCommand("SELECT * FROM [" + tableName + "$]", this.connection);
+                using (var reader = getTable.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var year = new YearDate();
+                        int id;
+                        if (int.TryParse(reader["Id"].ToString(), out id))
+                        {
+                            year.Id = id;
+                            year.Year = int.Parse(reader["Year"].ToString());
+                            years.Add(year);
+                        }
+                    }
+                }
+            }
+
+            return years.AsEnumerable<YearDate>();
+        }
+
         public IEnumerable<Country> GetCountries(string tableName)
         {
             this.connection = new OleDbConnection(connectionString);
@@ -221,7 +279,7 @@
                         {
                             country.Id = id;
                             country.Name = (string)reader["Name"];
-                            country.Continent = (Continent) int.Parse(reader["ContinentId"].ToString());
+                            country.Continent = (Continent)int.Parse(reader["ContinentId"].ToString());
                             countries.Add(country);
                         }
                     }
@@ -229,6 +287,8 @@
             }
             return countries.AsEnumerable<Country>();
         }
+
+
         /*
         private Toy CreateToy(OleDbDataReader reader)
         {

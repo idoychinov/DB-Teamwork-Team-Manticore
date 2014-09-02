@@ -47,6 +47,8 @@
 
         public IDbSet<Producer> Producers { get; set; }
 
+        public IDbSet<YearDate> YearDates { get; set; }
+
         public new IDbSet<T> Set<T>() where T : class
         {
             return base.Set<T>();

@@ -23,6 +23,7 @@
         {
             defaultConnectionName = SqlExpressConnectionName;
         }
+
         public static void InitializeForSqlServer()
         {
             defaultConnectionName = SqlServerConnectionName;

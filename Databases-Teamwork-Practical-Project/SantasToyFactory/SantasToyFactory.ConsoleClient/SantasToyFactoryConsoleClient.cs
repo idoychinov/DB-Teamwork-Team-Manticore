@@ -85,6 +85,10 @@
             {
                 SantasToyFactorySqlContext.InitializeForSqlServer();
             }
+            else
+            {
+                SantasToyFactorySqlContext.InitializeForSqlExpress();
+            }
 
             try
             {
@@ -123,6 +127,11 @@
             {
                 SantasToyFactorySqlContext.InitializeForSqlServer();
             }
+            else
+            {
+                SantasToyFactorySqlContext.InitializeForSqlExpress();
+            }
+
             ConsoleUtilities.ProcessingMessage("Initializing SQL database");
             try
             {

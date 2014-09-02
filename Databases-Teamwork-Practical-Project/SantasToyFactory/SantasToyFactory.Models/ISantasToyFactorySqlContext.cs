@@ -6,28 +6,30 @@
 
     public interface ISantasToyFactorySqlContext
     {
-         IDbSet<Address> Addresses { get; set; }
+        IDbSet<Address> Addresses { get; set; }
 
-         IDbSet<Country> Countries { get; set; }
+        IDbSet<Country> Countries { get; set; }
 
-         IDbSet<Delivery> Deliveries { get; set; }
+        IDbSet<Delivery> Deliveries { get; set; }
 
-         IDbSet<Child> Children { get; set; }
+        IDbSet<Child> Children { get; set; }
 
-         IDbSet<ToyType> ToyTypes { get; set; }
+        IDbSet<ToyType> ToyTypes { get; set; }
 
-         IDbSet<Town> Towns { get; set; }
+        IDbSet<Town> Towns { get; set; }
 
-         IDbSet<Toy> Toys { get; set; }
+        IDbSet<Toy> Toys { get; set; }
 
-         IDbSet<Deliverer> Deliverers { get; set; }
+        IDbSet<Deliverer> Deliverers { get; set; }
 
-         IDbSet<Producer> Producers { get; set; }
+        IDbSet<Producer> Producers { get; set; }
 
-         IDbSet<T> Set<T>() where T : class;
+        IDbSet<T> Set<T>() where T : class;
 
-         DbEntityEntry<T> Entry<T>(T entity) where T : class;
+        DbEntityEntry<T> Entry<T>(T entity) where T : class;
 
-         void SaveChanges();
+        IDbSet<YearDate> YearDates { get; set; }
+
+        void SaveChanges();
     }
 }

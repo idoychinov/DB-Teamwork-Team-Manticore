@@ -23,6 +23,7 @@
         {
             defaultConnectionName = SqlExpressConnectionName;
         }
+
         public static void InitializeForSqlServer()
         {
             defaultConnectionName = SqlServerConnectionName;
@@ -45,6 +46,8 @@
         public IDbSet<Deliverer> Deliverers { get; set; }
 
         public IDbSet<Producer> Producers { get; set; }
+
+        public IDbSet<YearDate> YearDates { get; set; }
 
         public new IDbSet<T> Set<T>() where T : class
         {

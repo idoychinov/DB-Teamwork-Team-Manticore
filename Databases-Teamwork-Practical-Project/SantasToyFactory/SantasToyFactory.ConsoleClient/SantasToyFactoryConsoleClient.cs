@@ -38,8 +38,8 @@
             {
 
                 // we will make it as linear flow one after another later
-                ConsoleUtilities.MenuMessage("For testing purposes. Press 1 to Initialize MongoDB; 2 to Migrate MongoDB to SQL; 3 to Read Excel; 4 to test SQL standalone initialization; "+
-                    "5 to clear data from MongoDb");
+                ConsoleUtilities.MenuMessage("For testing purposes.\n        Press\n  1 to Initialize MongoDB;\n  2 to Migrate MongoDB to SQL;\n  3 to Read Excel;\n  4 to test SQL standalone initialization; " +
+                    "\n  5 to clear data from MongoDb");
                 if (CheckForEsc(out currentKey))
                 {
                     active = false;
@@ -68,7 +68,7 @@
                         var mongoDb = new SantasToyFactoryMongoData();
                         mongoDb.DropCollectionsFromDatabase();
                         break;
-                    
+
                     default:
                         ConsoleUtilities.ErrorMessage("Wrong command. Please try again");
                         break;
@@ -84,6 +84,10 @@
             if (key.Key == ConsoleKey.NumPad1 || key.Key == ConsoleKey.D1)
             {
                 SantasToyFactorySqlContext.InitializeForSqlServer();
+            }
+            else
+            {
+                SantasToyFactorySqlContext.InitializeForSqlExpress();
             }
 
             try
@@ -103,8 +107,9 @@
 
         private static void ReadExcel()
         {
-            var excelFiles = ZipManipulator.ExtractFile(@"C:\Users\Stefan\Documents\GitHub\DB-Teamwork-Team-Manticore\Deliveries.zip", @"D:\Deliveries\");
+            var excelFiles = ZipManipulator.ExtractFile(@"C:\datainfo.zip", @"C:\Deliveries\");
             ExcelManipulator.AddExcelInfoToDatabase("Server = .; Database = SantasToyFactoryDb; Integrated Security = true", excelFiles);
+            //ExcelManipulator.AddExcelInfoToDatabase("Server = .\\SQLEXPRESS; Database = SantasToyFactoryDb; Integrated Security = true", excelFiles);
         }
 
         private static void InitializeMongo()
@@ -123,6 +128,11 @@
             {
                 SantasToyFactorySqlContext.InitializeForSqlServer();
             }
+            else
+            {
+                SantasToyFactorySqlContext.InitializeForSqlExpress();
+            }
+
             ConsoleUtilities.ProcessingMessage("Initializing SQL database");
             try
             {

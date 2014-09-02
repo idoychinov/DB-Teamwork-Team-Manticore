@@ -71,6 +71,7 @@
     <Compile Include="Repositories\TownsRepository.cs" />
     <Compile Include="Repositories\ToysRepository.cs" />
     <Compile Include="Repositories\ToyTypesRepository.cs" />
+    <Compile Include="Repositories\YearDatesRepository.cs" />
     <Compile Include="SantasToyFactoryMongoData.cs" />
     <Compile Include="SantasToyFactorySqlContext.cs" />
     <Compile Include="SantasToyFactoryDatabase.cs" />

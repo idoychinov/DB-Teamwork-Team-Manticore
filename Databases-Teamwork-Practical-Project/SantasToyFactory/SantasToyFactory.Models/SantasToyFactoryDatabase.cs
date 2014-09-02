@@ -63,6 +63,11 @@
             get { return (ToysRepository)this.GetRepository<Toy>(); }
         }
 
+        public IGenericRepository<YearDate> Years
+        {
+            get { return (YearDatesRepository)this.GetRepository<YearDate>(); }
+        }
+
         public IGenericRepository<ToyType> ToyTypes
         {
             get { return (ToyTypesRepository)this.GetRepository<ToyType>(); }
@@ -89,7 +94,7 @@
                 {
                     type = typeof(ChildrenRepository);
                 }
-                     else if (typeOfModel.IsAssignableFrom(typeof(Country)))
+                else if (typeOfModel.IsAssignableFrom(typeof(Country)))
                 {
                     type = typeof(CountriesRepository);
                 }
@@ -97,25 +102,29 @@
                 {
                     type = typeof(DeliverersRepository);
                 }
-                 else if (typeOfModel.IsAssignableFrom(typeof(Delivery)))
+                else if (typeOfModel.IsAssignableFrom(typeof(Delivery)))
                 {
                     type = typeof(DeliveriesRepository);
                 }
-                 else if (typeOfModel.IsAssignableFrom(typeof(Producer)))
+                else if (typeOfModel.IsAssignableFrom(typeof(Producer)))
                 {
                     type = typeof(ProducersRepository);
                 }
-                 else if (typeOfModel.IsAssignableFrom(typeof(Town)))
+                else if (typeOfModel.IsAssignableFrom(typeof(Town)))
                 {
                     type = typeof(TownsRepository);
                 }
-                 else if (typeOfModel.IsAssignableFrom(typeof(Toy)))
+                else if (typeOfModel.IsAssignableFrom(typeof(Toy)))
                 {
                     type = typeof(ToysRepository);
                 }
-                 else if (typeOfModel.IsAssignableFrom(typeof(ToyType)))
+                else if (typeOfModel.IsAssignableFrom(typeof(ToyType)))
                 {
                     type = typeof(ToyTypesRepository);
+                }
+                else if (typeOfModel.IsAssignableFrom(typeof(YearDate)))
+                {
+                    type = typeof(YearDatesRepository);
                 }
 
                 this.repositories.Add(typeOfModel, Activator.CreateInstance(type, this.context));
@@ -123,6 +132,6 @@
 
             return (IGenericRepository<T>)this.repositories[typeOfModel];
         }
-        
+
     }
 }

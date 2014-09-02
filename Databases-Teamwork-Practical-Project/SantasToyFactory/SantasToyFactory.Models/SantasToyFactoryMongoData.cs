@@ -19,7 +19,8 @@
         private const string AddressesName = "Addresses";
         private const string TownsName = "Towns";
         private const string CountriesName = "Countries";
-
+        private const string ChildrenName = "Children";
+        private const string YearDateName = "Year";
 
         private const string DataInitializationDocumentString = "../../../dataInfo.xls";
 
@@ -77,6 +78,20 @@
                 var data = excelData.GetCountries(CountriesName);
                 collection.InsertBatch(data);
             }
+
+            collection = db.GetCollection(ChildrenName);
+            if (collection.Count() == 0)
+            {
+                var data = excelData.GetChildren(ChildrenName);
+                collection.InsertBatch(data);
+            }
+
+            collection = db.GetCollection(YearDateName);
+            if (collection.Count() == 0)
+            {
+                var data = excelData.GetYears(YearDateName);
+                collection.InsertBatch(data);
+            }
         }
 
         public void DropCollectionsFromDatabase()
@@ -117,6 +132,18 @@
         public IEnumerable<Country> GetCountries()
         {
             var collection = this.db.GetCollection<Country>(CountriesName).FindAll().AsEnumerable<Country>();
+            return collection;
+        }
+
+        public IEnumerable<Child> GetChildren()
+        {
+            var collection = this.db.GetCollection<Child>(ChildrenName).FindAll().AsEnumerable<Child>();
+            return collection;
+        }
+
+        public IEnumerable<YearDate> GetYearDates()
+        {
+            var collection = this.db.GetCollection<YearDate>(YearDateName).FindAll().AsEnumerable<YearDate>();
             return collection;
         }
     }

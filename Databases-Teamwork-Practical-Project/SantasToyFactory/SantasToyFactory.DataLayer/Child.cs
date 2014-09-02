@@ -1,7 +1,14 @@
 ﻿namespace SantasToyFactory.Models
 {
-    public class Child
+    using System.Collections.Generic;
+    public class Child        
     {
+    //    private ICollection<Delivery> deliveries;
+    //    public Child()
+    //    {
+    //        this.deliveries = new HashSet<Delivery>();
+    //    }
+
         public int Id { get; set; }
 
         public string Name { get; set; }
@@ -16,5 +23,6 @@
 
         public int ToyId { get; set; }
 
+        public int DelivererId { get; set; }        
     }
 }

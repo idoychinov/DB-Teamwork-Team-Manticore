@@ -80,7 +80,7 @@
                 collection = db.GetCollection(CountriesName);
                 if (collection.Count() == 0)
                 {
-                    var data = excelData.GetCountry(CountriesName);
+                    var data = excelData.GetCountries(CountriesName);
                     collection.InsertBatch(data);
                 }
 

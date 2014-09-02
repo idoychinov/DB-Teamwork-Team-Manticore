@@ -107,7 +107,11 @@
 
         private static void ReadExcel()
         {
-            var excelFiles = ZipManipulator.ExtractFile(@"../../../Delivery Reports.zip", @"../../../ExtractedExcelReports");
+            const string archiveLocation = @"../../../Delivery Reports.zip";
+            const string unpackedLocation = @"../../../ExtractedExcelReports";
+            ZipManipulator.ExtractFile(archiveLocation, unpackedLocation);
+            var reportsReader = new DeliveryReportsReader(unpackedLocation);
+            var allDeliveries = reportsReader.GetAll();
             //ExcelManipulator.AddExcelInfoToDatabase("Server = .; Database = SantasToyFactoryDb; Integrated Security = true", excelFiles);
             //ExcelManipulator.AddExcelInfoToDatabase("Server = .\\SQLEXPRESS; Database = SantasToyFactoryDb; Integrated Security = true", excelFiles);
         }

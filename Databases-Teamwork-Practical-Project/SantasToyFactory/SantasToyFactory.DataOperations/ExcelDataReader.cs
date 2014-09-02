@@ -26,7 +26,7 @@
         {
             return GetElementsFromExcelSheet<Child>(sheet);
         }
-        
+
         public IEnumerable<Producer> GetProducers(string sheet)
         {
             return GetElementsFromExcelSheet<Producer>(sheet);
@@ -47,9 +47,38 @@
             return GetElementsFromExcelSheet<Town>(sheet);
         }
 
-        public IEnumerable<Country> GetCountry(string sheet)
+        public IEnumerable<Country> GetCountries(string sheet)
         {
             return GetElementsFromExcelSheet<Country>(sheet);
+        }
+
+        public IEnumerable<Delivery> GetDeliverys(string sheet)
+        {
+            var elements = new List<Delivery>();
+            OleDbCommand getTable = new OleDbCommand("SELECT * FROM [" + sheet + "$]", this.connection);
+            using (var reader = getTable.ExecuteReader())
+            {
+
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(2))
+                    {
+                        object[] values = new object[reader.FieldCount];
+                        reader.GetValues(values);
+
+                        var delivery = new Delivery();
+                        delivery.ChildId = int.Parse(reader[0].ToString());
+                        delivery.ToyId = int.Parse(reader[1].ToString());
+                        delivery.DelivererId = int.Parse(reader[2].ToString());
+                        delivery.Quantity = int.Parse(reader[3].ToString());
+                        elements.Add(delivery);
+                    }
+                    // var delivery = CreateDelivery(reader);
+                    // elements.Add(delivery);
+
+                }
+            }
+            return elements.AsEnumerable<Delivery>();
         }
 
         private IEnumerable<T> GetElementsFromExcelSheet<T>(string sheet) where T : class
@@ -59,46 +88,47 @@
             using (var reader = getTable.ExecuteReader())
             {
                 var typeName = typeof(T).Name;
+
                 while (reader.Read())
                 {
-                    if(reader.IsDBNull(1))
+                    if (reader.IsDBNull(1))
                     {
                         break;
                     }
                     if (typeName == "Toy")
                     {
                         var toy = CreateToy(reader);
-                        elements.Add((T) Convert.ChangeType(toy,typeof(T)));
+                        elements.Add((T)Convert.ChangeType(toy, typeof(T)));
                     }
-                    else if (typeName== "Child")
+                    else if (typeName == "Child")
                     {
                         var child = CreateChild(reader);
-                        elements.Add((T) Convert.ChangeType(child,typeof(T)));
+                        elements.Add((T)Convert.ChangeType(child, typeof(T)));
                     }
                     else if (typeName == "Producer")
                     {
                         var producer = CreateProducer(reader);
-                        elements.Add((T) Convert.ChangeType(producer,typeof(T)));
+                        elements.Add((T)Convert.ChangeType(producer, typeof(T)));
                     }
                     else if (typeName == "ToyType")
                     {
                         var toyType = CreateToyType(reader);
-                        elements.Add((T) Convert.ChangeType(toyType,typeof(T)));
+                        elements.Add((T)Convert.ChangeType(toyType, typeof(T)));
                     }
                     else if (typeName == "Address")
                     {
                         var address = CreateAddress(reader);
-                        elements.Add((T)Convert.ChangeType(address,typeof(T)));
+                        elements.Add((T)Convert.ChangeType(address, typeof(T)));
                     }
                     else if (typeName == "Town")
                     {
                         var town = CreateTown(reader);
-                        elements.Add((T)Convert.ChangeType(town,typeof(T)));
+                        elements.Add((T)Convert.ChangeType(town, typeof(T)));
                     }
                     else if (typeName == "Country")
                     {
                         var country = CreateCountry(reader);
-                        elements.Add((T) Convert.ChangeType(country,typeof(T)));
+                        elements.Add((T)Convert.ChangeType(country, typeof(T)));
                     }
                 }
             }
@@ -199,6 +229,7 @@
             }
             return country;
         }
+
 
         /*
         public IEnumerable<Toy> GetToys(string tableName)

@@ -9,7 +9,7 @@
 
     public static class ZipManipulator
     {
-        public static ICollection<string> ExtractFile(string fileLocation, string exctractLocation)
+        public static void ExtractFile(string fileLocation, string exctractLocation)
         {
             ICollection<string> filesPaths = new List<string>();
 
@@ -17,8 +17,6 @@
             {
                 archive.ExtractAll(exctractLocation, ExtractExistingFileAction.OverwriteSilently);
             }
-
-            return filesPaths;
         }
     }
 }

@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.IO;
 
     using Ionic.Zip;
 
@@ -14,15 +15,7 @@
 
             using(ZipFile archive = ZipFile.Read(fileLocation))
             {
-                foreach (var entry in archive)
-                {
-                    entry.Extract(exctractLocation, ExtractExistingFileAction.OverwriteSilently);
-                    string fileName = entry.FileName.Trim();
-                    if (fileName.IndexOf('/') != fileName.Length - 1)
-                    {
-                        filesPaths.Add(exctractLocation + fileName);
-                    }
-                }
+                archive.ExtractAll(exctractLocation, ExtractExistingFileAction.OverwriteSilently);
             }
 
             return filesPaths;

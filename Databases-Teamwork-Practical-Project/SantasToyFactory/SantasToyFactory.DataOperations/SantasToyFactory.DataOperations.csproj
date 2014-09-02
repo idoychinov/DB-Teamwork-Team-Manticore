@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeliveryReportsReader.cs" />
     <Compile Include="ExcelDataReader.cs" />
     <Compile Include="ExcelManipulator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

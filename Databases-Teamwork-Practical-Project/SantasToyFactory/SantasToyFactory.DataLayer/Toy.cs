@@ -4,33 +4,34 @@
 
     public class Toy
     {
-        private ICollection<Child> children;
+        private ICollection<Delivery> deliveries;
 
-         public Toy()
+        public Toy()
         {
-            this.children = new HashSet<Child>();
+            this.deliveries = new HashSet<Delivery>();
         }
+
         public int Id { get; set; }
 
         public string Name { get; set; }
 
         public decimal Price { get; set; }
 
-        public int ToyTypeId { get; set; }
-
         public int ProducerId { get; set; }
+
+        public int ToyTypeId { get; set; }
 
         public virtual ToyType ToyType { get; set; }
 
-       public virtual ICollection<Child > Children
+        public virtual ICollection<Delivery> Deliveries
         {
             get
             {
-                return this.children;
+                return this.deliveries;
             }
             set
             {
-                this.children = value;
+                this.deliveries = value;
             }
         }
     }

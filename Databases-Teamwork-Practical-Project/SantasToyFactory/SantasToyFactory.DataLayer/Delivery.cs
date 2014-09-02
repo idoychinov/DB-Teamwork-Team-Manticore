@@ -2,32 +2,19 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class Delivery
     {
-        private ICollection<Child> children;
-
-        public Delivery()
-        {
-            this.children = new HashSet<Child>();
-        }
-
         public int Id { get; set; }
 
         public int YearId { get; set; }
 
         public int DelivererId { get; set; }
 
-        public virtual ICollection<Child> Children
-        {
-            get
-            {
-                return this.children;
-            }
-            set
-            {
-                this.children = value;
-            }
-        }
+        [ForeignKey("Toy")]
+        public int ToyId { get; set; }
+
+        public virtual Toy Toy { get; set; }
     }
 }

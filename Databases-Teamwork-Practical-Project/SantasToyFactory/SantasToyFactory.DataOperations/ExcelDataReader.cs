@@ -93,6 +93,7 @@
                     }
                 }
             }
+
             return toys.AsEnumerable<Toy>();
         }
 
@@ -115,15 +116,15 @@
                             child.Id = id;
                             child.Name = (string)reader["Name"];
                             child.GroupAge = (GroupAge)int.Parse(reader["GroupAgeId"].ToString());
-                            // child.Behaviour = (Behaviour)int.Parse(reader["Behaviour"].ToString());
+                            child.Behavior = (Behavior)int.Parse(reader["BehaviorId"].ToString());
                             child.AddressId = int.Parse(reader["AddressId"].ToString());
-                            child.ToyId = int.Parse(reader["ToyId"].ToString());
                             child.DelivererId = int.Parse(reader["DelivererId"].ToString());
                             children.Add(child);
                         }
                     }
                 }
             }
+
             return children.AsEnumerable<Child>();
         }
 
@@ -150,6 +151,7 @@
                     }
                 }
             }
+
             return producers.AsEnumerable<Producer>();
         }
 
@@ -177,8 +179,35 @@
                     }
                 }
             }
+
             return toyTypes.AsEnumerable<ToyType>();
         }
+
+        //public IEnumerable<Behavior> GetBehaviors(string tableName)
+        //{
+        //    var behaviors = new List<Behavior>();
+        //    this.connection = new OleDbConnection(connectionString);
+        //    this.connection.Open();            
+        //    using(this.connection)
+        //    {
+        //        OleDbCommand getTable = new OleDbCommand("SELECT * FROM [" + tableName + "$]", this.connection);
+        //        using (var reader = getTable.ExecuteReader())
+        //        {
+        //            while (reader.Read())
+        //            {
+        //                var behavior = new Behavior();
+        //                int id;
+        //                if (int.TryParse(reader["Id"].ToString(), out id))
+        //                {
+        //                    behavior. = id;
+        //                    toyType.AdditionalInfo = (string)reader["AdditionalInfo"];
+        //                    toyType.GroupAge = (GroupAge)int.Parse(reader["GroupAgeId"].ToString());
+        //                    toyTypes.Add(toyType);
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
 
         public IEnumerable<Address> GetAddresses(string tableName)
         {
@@ -286,6 +315,7 @@
                     }
                 }
             }
+
             return countries.AsEnumerable<Country>();
         }
 

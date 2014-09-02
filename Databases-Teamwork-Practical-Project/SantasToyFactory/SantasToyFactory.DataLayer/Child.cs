@@ -20,9 +20,6 @@
         public int AddressId { get; set; }
 
         public virtual Address Adresss { get; set; }
-
-        public int ToyId { get; set; }
-
-        public int DelivererId { get; set; }        
+        
     }
 }

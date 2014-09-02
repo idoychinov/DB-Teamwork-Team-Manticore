@@ -5,6 +5,7 @@
     using System.Linq;
     using MongoDB.Bson;
     using MongoDB.Driver;
+    using System.Data.OleDb;
 
     using SantasToyFactory.DataOperations;
     using SantasToyFactory.Models;
@@ -22,7 +23,7 @@
         private const string ChildrenName = "Children";
         private const string YearDateName = "Year";
 
-        private const string DataInitializationDocumentString = "../../../dataInfo.xls";
+        private const string DataInitializationDocumentString ="Provider=Microsoft.Jet.OLEDB.4.0;Extended Properties=Excel 8.0;Data Source=../../../dataInfo.xls;";
 
         private readonly MongoServer server;
         private MongoDatabase db;
@@ -36,61 +37,68 @@
 
         public void InitializeDatabase()
         {
-            var excelData = new ExcelDataReader(DataInitializationDocumentString);
-            var collection = this.db.GetCollection(ToysCollectionName);
-            if (collection.Count() == 0)
+            OleDbConnection excelConnection = new OleDbConnection(DataInitializationDocumentString);
+            excelConnection.Open();
+            var excelData = new ExcelDataReader(excelConnection);
+            using (excelConnection)
             {
-                var data = excelData.GetToys(ToysCollectionName);
-                collection.InsertBatch(data);
-            }
+                var collection = this.db.GetCollection(ToysCollectionName);
+                if (collection.Count() == 0)
+                {
+                    var data = excelData.GetToys(ToysCollectionName);
+                    collection.InsertBatch(data);
+                }
 
-            collection = db.GetCollection(ProducersCollectionName);
-            if (collection.Count() == 0)
-            {
-                var data = excelData.GetProducers(ProducersCollectionName);
-                collection.InsertBatch(data);
-            }
+                collection = db.GetCollection(ProducersCollectionName);
+                if (collection.Count() == 0)
+                {
+                    var data = excelData.GetProducers(ProducersCollectionName);
+                    collection.InsertBatch(data);
+                }
 
-            collection = db.GetCollection(ToyTypesName);
-            if (collection.Count() == 0)
-            {
-                var data = excelData.GetToyTypes(ToyTypesName);
-                collection.InsertBatch(data);
-            }
+                collection = db.GetCollection(ToyTypesName);
+                if (collection.Count() == 0)
+                {
+                    var data = excelData.GetToyType(ToyTypesName);
+                    collection.InsertBatch(data);
+                }
 
-            collection = db.GetCollection(AddressesName);
-            if (collection.Count() == 0)
-            {
-                var data = excelData.GetAddresses(AddressesName);
-                collection.InsertBatch(data);
-            }
+                collection = db.GetCollection(AddressesName);
+                if (collection.Count() == 0)
+                {
+                    var data = excelData.GetAddresses(AddressesName);
+                    collection.InsertBatch(data);
+                }
 
-            collection = db.GetCollection(TownsName);
-            if (collection.Count() == 0)
-            {
-                var data = excelData.GetTowns(TownsName);
-                collection.InsertBatch(data);
-            }
+                collection = db.GetCollection(TownsName);
+                if (collection.Count() == 0)
+                {
+                    var data = excelData.GetTowns(TownsName);
+                    collection.InsertBatch(data);
+                }
 
-            collection = db.GetCollection(CountriesName);
-            if (collection.Count() == 0)
-            {
-                var data = excelData.GetCountries(CountriesName);
-                collection.InsertBatch(data);
-            }
+                collection = db.GetCollection(CountriesName);
+                if (collection.Count() == 0)
+                {
+                    var data = excelData.GetCountry(CountriesName);
+                    collection.InsertBatch(data);
+                }
 
-            collection = db.GetCollection(ChildrenName);
-            if (collection.Count() == 0)
-            {
-                var data = excelData.GetChildren(ChildrenName);
-                collection.InsertBatch(data);
-            }
+                collection = db.GetCollection(ChildrenName);
+                if (collection.Count() == 0)
+                {
+                    var data = excelData.GetChilds(ChildrenName);
+                    collection.InsertBatch(data);
+                }
 
-            collection = db.GetCollection(YearDateName);
-            if (collection.Count() == 0)
-            {
-                var data = excelData.GetYears(YearDateName);
-                collection.InsertBatch(data);
+                /*
+                collection = db.GetCollection(YearDateName);
+                if (collection.Count() == 0)
+                {
+                    var data = excelData.GetYears(YearDateName);
+                    collection.InsertBatch(data);
+                }
+                 */
             }
         }
 

@@ -5,29 +5,19 @@
 
     public class Delivery
     {
-        private ICollection<Child> children;
-
-        public Delivery()
-        {
-            this.children = new HashSet<Child>();
-        }
-
         public int Id { get; set; }
+                
+        public int Quantity { get; set; }
 
-        public int YearId { get; set; }
+        public DateTime Date { get; set; }
 
+        public int ChildId { get; set; }
+        
         public int DelivererId { get; set; }
 
-        public virtual ICollection<Child> Children
-        {
-            get
-            {
-                return this.children;
-            }
-            set
-            {
-                this.children = value;
-            }
-        }
+        public int ToyId { get; set; }
+
+        public int CountryId { get; set; }
+
     }
 }

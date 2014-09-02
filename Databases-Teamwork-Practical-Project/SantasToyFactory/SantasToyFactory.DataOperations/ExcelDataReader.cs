@@ -8,65 +8,194 @@
     using SantasToyFactory.Models;
 
 
-    public class ExcelDataReader//<T> where T : class
+    public class ExcelDataReader
     {
-        private OleDbConnection connection;
-        private string connectionString;
+        private readonly OleDbConnection connection;
 
-        public ExcelDataReader(string fileLocation)
+        public ExcelDataReader(OleDbConnection connection)
         {
-            this.connectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Extended Properties=Excel 8.0;Data Source=" + fileLocation + ";";
+            this.connection = connection;
         }
 
-        /*
-        public IEnumerable<T> GetElementsFromExcelSheet(string sheet)
+        public IEnumerable<Toy> GetToys(string sheet)
         {
-            this.connection = new OleDbConnection(connectionString);
-            this.connection.Open();
+            return GetElementsFromExcelSheet<Toy>(sheet);
+        }
+
+        public IEnumerable<Child> GetChilds(string sheet)
+        {
+            return GetElementsFromExcelSheet<Child>(sheet);
+        }
+        
+        public IEnumerable<Producer> GetProducers(string sheet)
+        {
+            return GetElementsFromExcelSheet<Producer>(sheet);
+        }
+
+        public IEnumerable<ToyType> GetToyType(string sheet)
+        {
+            return GetElementsFromExcelSheet<ToyType>(sheet);
+        }
+
+        public IEnumerable<Address> GetAddresses(string sheet)
+        {
+            return GetElementsFromExcelSheet<Address>(sheet);
+        }
+
+        public IEnumerable<Town> GetTowns(string sheet)
+        {
+            return GetElementsFromExcelSheet<Town>(sheet);
+        }
+
+        public IEnumerable<Country> GetCountry(string sheet)
+        {
+            return GetElementsFromExcelSheet<Country>(sheet);
+        }
+
+        private IEnumerable<T> GetElementsFromExcelSheet<T>(string sheet) where T : class
+        {
             var elements = new List<T>();
-            using (this.connection)
+            OleDbCommand getTable = new OleDbCommand("SELECT * FROM [" + sheet + "$]", this.connection);
+            using (var reader = getTable.ExecuteReader())
             {
-                OleDbCommand getTable = new OleDbCommand("SELECT * FROM [" + sheet + "$]", this.connection);
-                using (var reader = getTable.ExecuteReader())
+                while (reader.Read())
                 {
-                    while (reader.Read())
+                    if (elements.GetType().Name == "Toy")
                     {
-                        if (elements.GetType() == "Toy")
-                        {
-                            var toy = CreateToy(reader);
-                            elements.Add((T)toy);
-                        }
-                        else if (elements.GetType() == "Producer")
-                        {
-                            var producer = CreateProducer(reader);
-                            elements.Add((T)producer);
-                        }
-                        else if (elements.GetType() == "ToyType")
-                        {
-                            var toyType = CreateToyType(reader);
-                            elements.Add((T)toyType);
-                        }
-                        else if (elements.GetType() == "Address")
-                        {
-                            var address = CreateAddress(reader);
-                            elements.Add((T)address);
-                        }
-                        else if (elements.GetType() == "Town")
-                        {
-                            var town = CreateTown(reader);
-                            elements.Add((T)town);
-                        }
-                        else if (elements.GetType() == "Country")
-                        {
-                            var country = CreateCountry(reader);
-                            elements.Add((T)country);
-                        }
+                        var toy = CreateToy(reader);
+                        elements.Add((T)toy);
+                    }
+                    else if (elements.GetType().Name == "Child")
+                    {
+                        var producer = CreateChild(reader);
+                        elements.Add((T)producer);
+                    }
+                    else if (elements.GetType().Name == "Producer")
+                    {
+                        var producer = CreateProducer(reader);
+                        elements.Add((T)producer);
+                    }
+                    else if (elements.GetType().Name == "ToyType")
+                    {
+                        var toyType = CreateToyType(reader);
+                        elements.Add((T)toyType);
+                    }
+                    else if (elements.GetType().Name == "Address")
+                    {
+                        var address = CreateAddress(reader);
+                        elements.Add((T)address);
+                    }
+                    else if (elements.GetType().Name == "Town")
+                    {
+                        var town = CreateTown(reader);
+                        elements.Add((T)town);
+                    }
+                    else if (elements.GetType().Name == "Country")
+                    {
+                        var country = CreateCountry(reader);
+                        elements.Add((T)country);
                     }
                 }
             }
             return elements.AsEnumerable<T>();
         }
-        */
+
+        private Toy CreateToy(OleDbDataReader reader)
+        {
+            var toy = new Toy();
+            int id;
+            if (int.TryParse(reader["Id"].ToString(), out id))
+            {
+                toy.Id = id;
+                toy.Name = (string)reader["Name"];
+                // toy.Price = decimal.Parse(reader["Price"].ToString());
+                toy.ToyTypeId = int.Parse(reader["ToyTypeId"].ToString());
+                toy.ProducerId = int.Parse(reader["ProducerId"].ToString());
+            }
+            return toy;
+        }
+
+        private Child CreateChild(OleDbDataReader reader)
+        {
+            var child = new Child();
+            int id;
+            if (int.TryParse(reader["Id"].ToString(), out id))
+            {
+                child.Id = id;
+                child.Name = (string)reader["Name"];
+                child.GroupAge = (GroupAge)int.Parse(reader["GroupAgeId"].ToString());
+                // child.Behaviour = (Behaviour)int.Parse(reader["Behaviour"].ToString());
+                child.AddressId = int.Parse(reader["AddressId"].ToString());
+            }
+            return child;
+        }
+
+        private Producer CreateProducer(OleDbDataReader reader)
+        {
+            var producer = new Producer();
+            int id;
+            if (int.TryParse(reader["Id"].ToString(), out id))
+            {
+                producer.Id = id;
+                producer.Name = (string)reader["Name"];
+            }
+            return producer;
+        }
+
+        private ToyType CreateToyType(OleDbDataReader reader)
+        {
+            var toyType = new ToyType();
+            int id;
+            if (int.TryParse(reader["Id"].ToString(), out id))
+            {
+                toyType.Id = id;
+                toyType.AdditionalInfo = (string)reader["AdditionalInfo"];
+                toyType.GroupAge = (GroupAge)int.Parse(reader["GroupAgeId"].ToString());
+            }
+            return toyType;
+        }
+
+        private object CreateAddress(OleDbDataReader reader)
+        {
+            var address = new Address();
+            int id;
+            if (int.TryParse(reader["Id"].ToString(), out id))
+            {
+                address.Id = id;
+                address.Description = (string)reader["Description"];
+                address.TownId = int.Parse(reader["TownId"].ToString());
+            }
+            return address;
+        }
+
+        private Town CreateTown(OleDbDataReader reader)
+        {
+            var town = new Town();
+            int id;
+            if (int.TryParse(reader["Id"].ToString(), out id))
+            {
+                town.Id = id;
+                town.Name = (string)reader["Name"];
+                town.CountryId = int.Parse(reader["CountryId"].ToString());
+                town.PostCode = reader["PostCode"].ToString();
+            }
+            return town;
+        }
+
+        private Country CreateCountry(OleDbDataReader reader)
+        {
+            var country = new Country();
+            int id;
+            if (int.TryParse(reader["Id"].ToString(), out id))
+            {
+                country.Id = id;
+                country.Name = (string)reader["Name"];
+                country.Continent = (Continent)int.Parse(reader["ContinentId"].ToString());
+            }
+            return country;
+        }
+
+        /*
         public IEnumerable<Toy> GetToys(string tableName)
         {
             this.connection = new OleDbConnection(connectionString);
@@ -117,8 +246,6 @@
                             child.GroupAge = (GroupAge)int.Parse(reader["GroupAgeId"].ToString());
                             // child.Behaviour = (Behaviour)int.Parse(reader["Behaviour"].ToString());
                             child.AddressId = int.Parse(reader["AddressId"].ToString());
-                            child.ToyId = int.Parse(reader["ToyId"].ToString());
-                            child.DelivererId = int.Parse(reader["DelivererId"].ToString());
                             children.Add(child);
                         }
                     }
@@ -288,88 +415,10 @@
             }
             return countries.AsEnumerable<Country>();
         }
-
+        */
 
         /*
-        private Toy CreateToy(OleDbDataReader reader)
-        {
-            var toy = new Toy();
-            int id;
-            if (int.TryParse(reader["Id"].ToString(), out id))
-            {
-                toy.Id = id;
-                toy.Name = (string)reader["Name"];
-                toy.Price = decimal.Parse(reader["Price"].ToString());
-                toy.ToyTypeId = int.Parse(reader["ToyTypeId"].ToString());
-            }
-            return toy;
-        }
-
-        private Producer CreateProducer(OleDbDataReader reader)
-        {
-            var producer = new Producer();
-            int id;
-            if (int.TryParse(reader["Id"].ToString(), out id))
-            {
-                producer.Id = id;
-                producer.Name = (string)reader["Name"];
-            }
-            return producer;
-        }
-
-        private ToyType CreateToyType(OleDbDataReader reader)
-        {
-            var toyType = new ToyType();
-            int id;
-            if (int.TryParse(reader["Id"].ToString(), out id))
-            {
-                toyType.Id = id;
-                toyType.AdditionalInfo = (string)reader["AdditionalInfo"];
-                toyType.GroupAgeId = int.Parse(reader["GroupAgeId"].ToString());
-
-            }
-            return toyType;
-        }
-
-        private object CreateAddress(OleDbDataReader reader)
-        {
-            var address = new Address();
-            int id;
-            if (int.TryParse(reader["Id"].ToString(), out id))
-            {
-                address.Id = id;
-                address.Description = (string)reader["Description"];
-                address.TownId = int.Parse(reader["TownId"].ToString());
-            }
-            return address;
-        }
-
-        private Town CreateTown(OleDbDataReader reader)
-        {
-            var town = new Town();
-            int id;
-            if (int.TryParse(reader["Id"].ToString(), out id))
-            {
-                town.Id = id;
-                town.Name = (string)reader["Name"];
-                town.CountryId = int.Parse(reader["CountryId"].ToString());
-                town.Name = reader["PostCode"].ToString();
-            }
-            return town;
-        }
-
-        private Country CreateCountry(OleDbDataReader reader)
-        {
-            var country = new Country();
-            int id;
-            if (int.TryParse(reader["Id"].ToString(), out id))
-            {
-                country.Id = id;
-                country.Name = (string)reader["Name"];
-                country.ContinentId = int.Parse(reader["ContinentId"].ToString());
-            }
-            return country;
-        }
+        
         */
     }
 }

@@ -58,42 +58,47 @@
             OleDbCommand getTable = new OleDbCommand("SELECT * FROM [" + sheet + "$]", this.connection);
             using (var reader = getTable.ExecuteReader())
             {
+                var typeName = typeof(T).Name;
                 while (reader.Read())
                 {
-                    if (elements.GetType().Name == "Toy")
+                    if(reader.IsDBNull(1))
+                    {
+                        break;
+                    }
+                    if (typeName == "Toy")
                     {
                         var toy = CreateToy(reader);
-                        elements.Add((T)toy);
+                        elements.Add((T) Convert.ChangeType(toy,typeof(T)));
                     }
-                    else if (elements.GetType().Name == "Child")
+                    else if (typeName== "Child")
                     {
-                        var producer = CreateChild(reader);
-                        elements.Add((T)producer);
+                        var child = CreateChild(reader);
+                        elements.Add((T) Convert.ChangeType(child,typeof(T)));
                     }
-                    else if (elements.GetType().Name == "Producer")
+                    else if (typeName == "Producer")
                     {
                         var producer = CreateProducer(reader);
-                        elements.Add((T)producer);
+                        elements.Add((T) Convert.ChangeType(producer,typeof(T)));
                     }
-                    else if (elements.GetType().Name == "ToyType")
+                    else if (typeName == "ToyType")
                     {
                         var toyType = CreateToyType(reader);
-                        elements.Add((T)toyType);
+                        elements.Add((T) Convert.ChangeType(toyType,typeof(T)));
                     }
-                    else if (elements.GetType().Name == "Address")
+                    else if (typeName == "Address")
                     {
                         var address = CreateAddress(reader);
-                        elements.Add((T)address);
+                        elements.Add((T)Convert.ChangeType(address,typeof(T)));
                     }
-                    else if (elements.GetType().Name == "Town")
+                    else if (typeName == "Town")
                     {
                         var town = CreateTown(reader);
-                        elements.Add((T)town);
+                        elements.Add((T)Convert.ChangeType(town,typeof(T)));
                     }
-                    else if (elements.GetType().Name == "Country")
+                    else if (typeName == "Country")
                     {
                         var country = CreateCountry(reader);
-                        elements.Add((T)country);
+                        elements.Add((T) Convert.ChangeType(country,typeof(T)));
                     }
                 }
             }

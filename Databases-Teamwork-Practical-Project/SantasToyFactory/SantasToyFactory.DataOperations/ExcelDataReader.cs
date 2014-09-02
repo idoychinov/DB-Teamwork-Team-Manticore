@@ -87,6 +87,7 @@
                             toy.Name = (string)reader["Name"];
                             toy.Price = decimal.Parse(reader["Price"].ToString());
                             toy.ToyTypeId = int.Parse(reader["ToyTypeId"].ToString());
+                            toy.ProducerId = int.Parse(reader["ProducerId"].ToString());
                             toys.Add(toy);
                         }
                     }
@@ -117,7 +118,7 @@
                             // child.Behaviour = (Behaviour)int.Parse(reader["Behaviour"].ToString());
                             child.AddressId = int.Parse(reader["AddressId"].ToString());
                             child.ToyId = int.Parse(reader["ToyId"].ToString());
-                            // child.DelivererId = (Deliverer)int.Parse(reader["DelivererId"].ToString());
+                            child.DelivererId = int.Parse(reader["DelivererId"].ToString());
                             children.Add(child);
                         }
                     }

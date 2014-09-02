@@ -18,6 +18,8 @@
 
         public int ToyTypeId { get; set; }
 
+        public int ProducerId { get; set; }
+
         public virtual ToyType ToyType { get; set; }
 
        public virtual ICollection<Child > Children

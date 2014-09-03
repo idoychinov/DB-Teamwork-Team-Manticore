@@ -2,5 +2,6 @@
   "toy-id": 18,
   "name": "Pound Puppy",
   "price": 62.50,
-  "toy-description": "stuffted animal"
+  "toy-description": "stuffted animal",
+  "toy-producer": "Shinny Upatree"
 }

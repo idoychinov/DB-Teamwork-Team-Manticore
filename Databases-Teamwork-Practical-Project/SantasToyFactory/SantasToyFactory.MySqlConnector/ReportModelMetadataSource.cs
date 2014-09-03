@@ -32,12 +32,14 @@ namespace SantasToyFactory.MySqlConnector
             var toyReportMapping = new MappingConfiguration<ToyReport>();
             toyReportMapping.MapType(tr => new
             {
-                ID = tr.Id,
+                ID = tr.ID,
+                Producer = tr.Producer,
                 Name = tr.Name,
                 Price = tr.Price,
                 Description = tr.Description
             });
 
+            toyReportMapping.HasProperty(t => t.ID).IsIdentity();
             configurations.Add(toyReportMapping);
 
             return configurations;

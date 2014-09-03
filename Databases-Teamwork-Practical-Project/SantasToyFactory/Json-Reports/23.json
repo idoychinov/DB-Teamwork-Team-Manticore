@@ -1,6 +1,7 @@
 {
   "toy-id": 23,
   "name": "Zhu Zhu",
-  "price": 0.00,
-  "toy-description": "robotic hamsters"
+  "price": 10.00,
+  "toy-description": "robotic hamsters",
+  "toy-producer": "Bushy Evergreen"
 }

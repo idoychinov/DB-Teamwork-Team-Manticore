@@ -1,6 +1,7 @@
 {
   "toy-id": 40,
   "name": "Teddy Ruxpin",
-  "price": 0.00,
-  "toy-description": "stuffed animal used cassette tapes to \"read\" to its young companions"
+  "price": 81.00,
+  "toy-description": "stuffed animal used cassette tapes to \"read\" to its young companions",
+  "toy-producer": "Bushy Evergreen"
 }

@@ -25,8 +25,9 @@ namespace SantasToyFactory.ConsoleClient
                 string toyName = toy.Name;
                 decimal toyPrice = toy.Price;
                 string toyDescription = toy.ToyType.AdditionalInfo;
+                string toyProducer = toy.Producer.Name;
 
-                reports.Add(new ToyReport {Id = toyId, Name =toyName, Price = toyPrice, Description = toyDescription});
+                reports.Add(new ToyReport {ID = toyId, Name =toyName, Price = toyPrice, Description = toyDescription, Producer = toyProducer});
 
                 using (FileStream fs = File.Open(@"../../../Json-Reports/" + toy.Id + ".json", FileMode.Create))
                 {
@@ -45,6 +46,8 @@ namespace SantasToyFactory.ConsoleClient
                             writer.WriteValue(toyPrice);
                             writer.WritePropertyName("toy-description");
                             writer.WriteValue(toyDescription);
+                            writer.WritePropertyName("toy-producer");
+                            writer.WriteValue(toyProducer);
                         }
                     }
                 }

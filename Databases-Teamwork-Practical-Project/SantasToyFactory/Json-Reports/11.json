@@ -2,5 +2,6 @@
   "toy-id": 11,
   "name": "Little Tikes Cozy Coupe Car",
   "price": 21.00,
-  "toy-description": "classic red-and-yellow car"
+  "toy-description": "classic red-and-yellow car",
+  "toy-producer": "Alabaster Snowball"
 }

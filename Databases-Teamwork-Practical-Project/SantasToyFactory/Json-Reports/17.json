@@ -2,5 +2,6 @@
   "toy-id": 17,
   "name": "Koosh Ball",
   "price": 39.00,
-  "toy-description": "A ball made out of rubber fibers that were easily grabbed by tiny fingers"
+  "toy-description": "A ball made out of rubber fibers that were easily grabbed by tiny fingers",
+  "toy-producer": "Alabaster Snowball"
 }

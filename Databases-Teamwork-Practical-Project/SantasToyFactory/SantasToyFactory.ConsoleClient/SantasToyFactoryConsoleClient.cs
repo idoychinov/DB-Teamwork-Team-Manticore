@@ -6,6 +6,7 @@
 
     using SantasToyFactory.DataLayer;
     using SantasToyFactory.DataOperations;
+    using SantasToyFactory.Models;
     using SantasToyFactory.MySqlConnector;
     using SantasToyFactory.SqliteDb;
     using Telerik.OpenAccess.Exceptions;
@@ -98,7 +99,12 @@
             {
                 var sqliteDb = new ToyProductionDetailsRepository(sqliteContext);
                 var toyProductionDetiles = sqliteDb.GetToyProductionDetails().ToList();
-                var toyReports = mySqlContext.GetAll<ToyReport>();
+                var toyReports = mySqlContext.GetAll<ToyReport>().ToList();
+                var excelReportQuery = toyReports.Join(toyProductionDetiles, tr => tr.ID, tpd => tpd.Id,
+                    (tr, tpd) => new { tr.ID, tr.Name, tr.Price, tr.Producer, tpd.Quantity, tpd.CommissionPercent });
+                 //   .GroupBy(x => x.Producer)
+                //.Sum(x => x.Price*x.Quantity*x.CommissionPercent/100);
+                var a = excelReportQuery.ToList();
             }
         }
 

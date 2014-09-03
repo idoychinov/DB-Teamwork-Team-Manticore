@@ -143,7 +143,7 @@
             {
                 toy.Id = id;
                 toy.Name = (string)reader["Name"];
-                // toy.Price = decimal.Parse(reader["Price"].ToString());
+                toy.Price = decimal.Parse(reader["Price"].ToString());
                 toy.ToyTypeId = int.Parse(reader["ToyTypeId"].ToString());
                 toy.ProducerId = int.Parse(reader["ProducerId"].ToString());
             }

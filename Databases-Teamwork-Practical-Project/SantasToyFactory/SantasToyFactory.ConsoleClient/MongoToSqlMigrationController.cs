@@ -65,12 +65,6 @@
                 this.sqlDb.Children.Add(item);
             }
 
-            var yearDates = this.mongoDB.GetYearDates();
-            foreach (var item in yearDates)
-            {
-                this.sqlDb.Years.Add(item);
-            }
-
             this.sqlDb.SaveChanges();
         }
     }

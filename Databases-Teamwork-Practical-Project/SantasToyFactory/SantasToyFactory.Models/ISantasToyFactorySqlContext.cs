@@ -28,8 +28,6 @@
 
         DbEntityEntry<T> Entry<T>(T entity) where T : class;
 
-        IDbSet<YearDate> YearDates { get; set; }
-
         void SaveChanges();
     }
 }

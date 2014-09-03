@@ -148,11 +148,5 @@
             var collection = this.db.GetCollection<Child>(ChildrenName).FindAll().AsEnumerable<Child>();
             return collection;
         }
-
-        public IEnumerable<YearDate> GetYearDates()
-        {
-            var collection = this.db.GetCollection<YearDate>(YearDateName).FindAll().AsEnumerable<YearDate>();
-            return collection;
-        }
     }
 }

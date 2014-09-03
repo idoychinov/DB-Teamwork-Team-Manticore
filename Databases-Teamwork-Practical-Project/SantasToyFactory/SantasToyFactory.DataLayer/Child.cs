@@ -11,7 +11,7 @@
 
         public GroupAge GroupAge { get; set; }
 
-        public virtual Behavior Behavior { get; set; }
+        public Behavior Behavior { get; set; }
 
         public int AddressId { get; set; }
 

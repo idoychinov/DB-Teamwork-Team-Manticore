@@ -64,7 +64,6 @@
     <Compile Include="Town.cs" />
     <Compile Include="Toy.cs" />
     <Compile Include="Deliverer.cs" />
-    <Compile Include="YearDate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

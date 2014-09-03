@@ -21,8 +21,6 @@
 
         IGenericRepository<ToyType> ToyTypes { get; }
 
-        IGenericRepository<YearDate> Years { get; }
-
         void SaveChanges();
 
     }

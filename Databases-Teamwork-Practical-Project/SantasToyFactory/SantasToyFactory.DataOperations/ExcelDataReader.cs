@@ -159,7 +159,7 @@
                 child.Id = id;
                 child.Name = (string)reader["Name"];
                 child.GroupAge = (GroupAge)int.Parse(reader["GroupAgeId"].ToString());
-                // child.Behaviour = (Behaviour)int.Parse(reader["Behaviour"].ToString());
+                child.Behavior = (Behavior)int.Parse(reader["BehaviorId"].ToString());
                 child.AddressId = int.Parse(reader["AddressId"].ToString());
             }
             return child;

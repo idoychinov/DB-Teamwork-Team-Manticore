@@ -25,7 +25,6 @@ namespace SantasToyFactory.MySqlConnector
 
 	public partial class ReportModelMetadataSource : FluentMetadataSource
 	{
-
         protected override IList<MappingConfiguration> PrepareMapping()
         {
             List<MappingConfiguration> configurations = new List<MappingConfiguration>();

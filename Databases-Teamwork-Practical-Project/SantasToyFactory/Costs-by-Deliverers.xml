@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<costs>
+  <cost deliverer="Dasher">
+    <summary date="2010-12-24T00:00:00" total-cost="0.00" />
+    <summary date="2011-12-24T00:00:00" total-cost="0.00" />
+  </cost>
+  <cost deliverer="Dancer">
+    <summary date="2010-12-24T00:00:00" total-cost="0.00" />
+    <summary date="2011-12-24T00:00:00" total-cost="0.00" />
+  </cost>
+  <cost deliverer="Prancer">
+    <summary date="2010-12-24T00:00:00" total-cost="0.00" />
+  </cost>
+  <cost deliverer="Vixen">
+    <summary date="2010-12-24T00:00:00" total-cost="0.00" />
+  </cost>
+  <cost deliverer="Comet">
+    <summary date="2010-12-24T00:00:00" total-cost="0.00" />
+  </cost>
+  <cost deliverer="Dunder">
+    <summary date="2010-12-24T00:00:00" total-cost="0.00" />
+  </cost>
+  <cost deliverer="Rudolph">
+    <summary date="2010-12-24T00:00:00" total-cost="0.00" />
+    <summary date="2011-12-24T00:00:00" total-cost="0.00" />
+  </cost>
+  <cost deliverer="Santa Clause">
+    <summary date="2010-12-24T00:00:00" total-cost="0.00" />
+    <summary date="2011-12-24T00:00:00" total-cost="0.00" />
+  </cost>
+</costs>

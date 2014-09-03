@@ -2,9 +2,11 @@
 {
     using System;
     using System.Linq;
+    using System.Data.SQLite.EF6;
 
     using SantasToyFactory.DataLayer;
     using SantasToyFactory.DataOperations;
+    using SantasToyFactory.MySqlConnector;
     using SantasToyFactory.SqliteDb;
     using Telerik.OpenAccess.Exceptions;
 
@@ -78,8 +80,8 @@
                     case ConsoleKey.D7:
                         CreateXMLReports();
                         break;
-                        case ConsoleKey.NumPad8:
-                        case ConsoleKey.D8:
+                    case ConsoleKey.NumPad8:
+                    case ConsoleKey.D8:
                         GenerateExcelReport();
                         break;
                     default:
@@ -88,15 +90,15 @@
                 }
             }
         }
- 
+
         private static void GenerateExcelReport()
         {
-            var sqliteContext = new SantasToyFactorySqliteContext();
-            var sqliteDb = new ToyProductionDetailsRepository(sqliteContext);
-            var toyProductionDetiles = sqliteDb.GetToyProductionDetails();
-            foreach(var item in toyProductionDetiles)
+            using (var sqliteContext = new SantasToyFactorySqliteContext())
+            using (var mySqlContext = new ReportModel())
             {
-                Console.WriteLine(item);
+                var sqliteDb = new ToyProductionDetailsRepository(sqliteContext);
+                var toyProductionDetiles = sqliteDb.GetToyProductionDetails().ToList();
+                var toyReports = mySqlContext.GetAll<ToyReport>();
             }
         }
 

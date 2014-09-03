@@ -17,7 +17,6 @@ namespace SantasToyFactory.ConsoleClient
         {
             List<ToyReport> reports = new List<ToyReport>();
 
-            SantasToyFactorySqlContext.InitializeForSqlServer();
             SantasToyFactorySqlContext ctx = new SantasToyFactorySqlContext();
             var toys = ctx.Toys.ToList();
             foreach (var toy in toys)

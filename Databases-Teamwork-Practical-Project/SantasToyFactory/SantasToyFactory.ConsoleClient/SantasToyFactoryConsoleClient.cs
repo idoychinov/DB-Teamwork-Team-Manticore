@@ -82,12 +82,14 @@
 
         private static void CreateJsonReports()
         {
+            ChooseServer();
+
             var reports = JsonReport.CreateReports();
             JsonReport.TransferToMySql(reports);
-            ConsoleUtilities.SuccessMessage("Migration completed successfully.");
+            ConsoleUtilities.SuccessMessage("Reports are created successfully.");
         }
 
-        private static void MigrateMongoToSql()
+        private static void ChooseServer()
         {
             ConsoleUtilities.MenuMessage("Press 1 for SQL Server or any other key for SQL Express");
             var key = Console.ReadKey();
@@ -100,6 +102,10 @@
             {
                 SantasToyFactorySqlContext.InitializeForSqlExpress();
             }
+        }
+        private static void MigrateMongoToSql()
+        {
+            ChooseServer();
 
             try
             {

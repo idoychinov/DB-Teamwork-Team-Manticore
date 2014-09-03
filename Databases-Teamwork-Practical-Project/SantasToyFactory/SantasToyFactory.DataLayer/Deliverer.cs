@@ -7,12 +7,10 @@
     public class Deliverer
     {
         private ICollection<Delivery> deliveries;
-        private ICollection<Child> children;
 
         public Deliverer()
         {
             this.deliveries = new HashSet<Delivery>();
-            this.children = new HashSet<Child>();
         }
 
         public int Id { get; set; }
@@ -28,19 +26,6 @@
             set
             {
                 this.deliveries = value;
-            }
-        }
-
-        public virtual ICollection<Child> Children
-        {
-            get
-            {
-                return this.children;
-            }
-
-            set
-            {
-                this.children = value;
             }
         }
     }

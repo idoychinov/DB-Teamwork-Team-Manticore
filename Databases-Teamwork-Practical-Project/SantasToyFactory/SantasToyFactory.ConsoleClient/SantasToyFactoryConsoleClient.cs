@@ -112,6 +112,15 @@
             ZipManipulator.ExtractFile(archiveLocation, unpackedLocation);
             var reportsReader = new DeliveryReportsReader(unpackedLocation);
             var allDeliveries = reportsReader.GetAll();
+            var db = InitializeSQL();
+            var countries  =db.Children.All().Select(x => new { childId = x.Id, countryId = x.Adresss.Town.CountryId}).ToList();
+            foreach (var delivery in allDeliveries)
+            {
+                var country = countries.Where(c => c.childId == delivery.ChildId).First().countryId;
+                delivery.CountryId = country;
+                db.Deliveries.Add(delivery);
+            }
+            db.SaveChanges();
             //ExcelManipulator.AddExcelInfoToDatabase("Server = .; Database = SantasToyFactoryDb; Integrated Security = true", excelFiles);
             //ExcelManipulator.AddExcelInfoToDatabase("Server = .\\SQLEXPRESS; Database = SantasToyFactoryDb; Integrated Security = true", excelFiles);
         }
@@ -123,7 +132,7 @@
             ConsoleUtilities.SuccessMessage("Database initialized successfully.");
         }
 
-        private static void InitializeSQL()
+        private static SantasToyFactoryDatabase InitializeSQL()
         {
             ConsoleUtilities.MenuMessage("Press 1 for SQL Server or any other key for SQL Express");
             var key = Console.ReadKey();
@@ -136,11 +145,12 @@
             {
                 SantasToyFactorySqlContext.InitializeForSqlExpress();
             }
+            var db = new SantasToyFactoryDatabase();
 
             ConsoleUtilities.ProcessingMessage("Initializing SQL database");
             try
             {
-                var db = new SantasToyFactoryDatabase();
+
                 var test = db.Deliverers.SearchFor(d => d.Id == 1).First().Name;
 
                 ConsoleUtilities.SuccessMessage("Database initialized successfully.");
@@ -151,6 +161,8 @@
             {
                 ConsoleUtilities.ErrorMessage(String.Format("Error while using database: {0}", e));
             }
+
+            return db;
         }
     }
 }

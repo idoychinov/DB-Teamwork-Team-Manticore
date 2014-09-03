@@ -10,6 +10,7 @@
     public class DeliveryReportsReader
     {
         private string rootFolder;
+
         public DeliveryReportsReader(string folder)
         {
             this.rootFolder = folder;
@@ -32,6 +33,7 @@
                     var data = excelData.GetDeliverys("Deliveries");
                     foreach (var delivery in data)
                     {
+                        delivery.Date = ParseYear(date);
                         deliveries.Add(delivery);
                     }
                 }
@@ -40,5 +42,11 @@
             return deliveries.AsEnumerable<Delivery>();
         }
 
+        private DateTime ParseYear(string dateString)
+        {
+            var year = int.Parse(dateString.Substring(dateString.Length - 4));
+            var date = new DateTime(year,12,24);
+            return date;
+        }
     }
 }

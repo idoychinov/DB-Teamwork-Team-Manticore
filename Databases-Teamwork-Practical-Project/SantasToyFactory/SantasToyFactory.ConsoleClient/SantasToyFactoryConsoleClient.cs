@@ -10,6 +10,9 @@
     using SantasToyFactory.MySqlConnector;
     using SantasToyFactory.SqliteDb;
     using Telerik.OpenAccess.Exceptions;
+    using PdfSharp;
+    using PdfSharp.Drawing;
+    using PdfSharp.Pdf;
 
     public class SantasToyFactoryConsoleClient
     {
@@ -44,7 +47,7 @@
 
                 // we will make it as linear flow one after another later
                 ConsoleUtilities.MenuMessage("For testing purposes.\n        Press\n  1 to Initialize MongoDB;\n  2 to Migrate MongoDB to SQL;\n  3 to Read Excel;\n  4 to test SQL standalone initialization; " +
-                    "\n  5 to clear data from MongoDb \n  6 to create Json reports and transfer them to MySql \n  7 to Create XML report \n  8 to Generate Excel report");
+                    "\n  5 to clear data from MongoDb \n  6 to create Json reports and transfer them to MySql \n  7 to Create XML report \n  8 to Generate Excel report  \n  9 to Generate PDF report");
                 if (CheckForEsc(out currentKey))
                 {
                     active = false;
@@ -85,11 +88,91 @@
                     case ConsoleKey.D8:
                         GenerateExcelReport();
                         break;
+                    case ConsoleKey.NumPad9:
+                    case ConsoleKey.D9:
+                        GeneratePDFreports();
+                        break;
                     default:
                         ConsoleUtilities.ErrorMessage("Wrong command. Please try again");
                         break;
                 }
             }
+        }
+
+        private static void GeneratePDFreports()
+        {
+            var mongoDb = new SantasToyFactoryMongoData();
+            var db = InitializeSQL();
+            var report = new PdfDocument();
+            //report.Info.Title = "PDF export try";
+            PdfPage page = report.AddPage();
+            XGraphics gfx = XGraphics.FromPdfPage(page);
+            XStringFormat format = new XStringFormat();
+            format.Alignment = XStringAlignment.Near;
+            DrawTitle(report, page, gfx, "Deliveries by location");
+            DrawText(gfx, 0, report);
+
+            int horizontalFirst = 60;
+            int horizontalSecond = 145;
+            int horizontalThird = 295;
+            int vertical = 75;
+            var locations = db.Countries.All();
+            foreach (var item in locations)
+            {
+                var children = db.Children.All().Where(x => x.Adresss.Town.Country == item).Count();  // + .Select(x => x.Name)
+                var deliveries = db.Deliveries.All().Where(x => x.CountryId == item.Id).Count();
+                gfx.DrawString(item.Name, new XFont("Times New Roman", 9, XFontStyle.Regular, new XPdfFontOptions(PdfFontEncoding.WinAnsi, PdfFontEmbedding.Default)), XBrushes.DarkSlateGray, horizontalFirst, vertical, format);
+                gfx.DrawString(children.ToString(), new XFont("Times New Roman", 9, XFontStyle.Regular, new XPdfFontOptions(PdfFontEncoding.WinAnsi, PdfFontEmbedding.Default)), XBrushes.DarkSlateGray, horizontalSecond, vertical, format);
+                gfx.DrawString(deliveries.ToString(), new XFont("Times New Roman", 9, XFontStyle.Regular, new XPdfFontOptions(PdfFontEncoding.WinAnsi, PdfFontEmbedding.Default)), XBrushes.DarkSlateGray, horizontalThird, vertical, format);
+
+                vertical += 25;
+            }
+
+            gfx.DrawLine(new XPen(new XColor() { R = 0, G = 0, B = 0 }), 50, 45, 50, vertical);
+            gfx.DrawLine(new XPen(new XColor() { R = 0, G = 0, B = 0 }), 135, 45, 135, vertical);
+            gfx.DrawLine(new XPen(new XColor() { R = 0, G = 0, B = 0 }), 290, 45, 290, vertical);
+            gfx.DrawLine(new XPen(new XColor() { R = 0, G = 0, B = 0 }), 450, 45, 450, vertical);
+            gfx.DrawLine(new XPen(new XColor() { R = 0, G = 0, B = 0 }), 50, vertical, 450, vertical);
+
+            report.Save(@"../../../PDF reports/test-report.pdf");
+            //Process.Start(@"../../test-report.pdf");
+        }
+
+        public static void DrawTitle(PdfDocument report, PdfPage page, XGraphics gfx, string title)
+        {
+            XRect rect = new XRect(new XPoint(), gfx.PageSize);
+            rect.Inflate(-10, -15);
+            XFont font = new XFont("Verdana", 14, XFontStyle.Bold);
+            gfx.DrawString(title, font, XBrushes.MidnightBlue, rect, XStringFormats.TopCenter);
+            rect.Offset(0, 5);
+            font = new XFont("Verdana", 8, XFontStyle.Italic);
+            XStringFormat format = new XStringFormat();
+            format.Alignment = XStringAlignment.Near;
+            format.LineAlignment = XLineAlignment.Far;
+            //gfx.DrawString("Created with " + PdfSharp.ProductVersionInfo.Producer, font, XBrushes.DarkOrchid, rect, format);
+            font = new XFont("Verdana", 8);
+            format.Alignment = XStringAlignment.Center;
+            gfx.DrawString(report.PageCount.ToString(), font, XBrushes.DarkOrchid, rect, format);
+            report.Outlines.Add(title, page, true);
+        }
+
+        public static void DrawText(XGraphics gfx, int number, PdfDocument d)
+        {
+            const string facename = "Times New Roman";
+            XPdfFontOptions options = new XPdfFontOptions(PdfFontEncoding.WinAnsi, PdfFontEmbedding.Default);
+            XFont fontRegular = new XFont(facename, 9, XFontStyle.Regular, options);
+            XFont fontBold = new XFont(facename, 14, XFontStyle.Bold, options);
+            XFont fontItalic = new XFont(facename, 20, XFontStyle.Italic, options);
+            XFont fontBoldItalic = new XFont(facename, 20, XFontStyle.BoldItalic, options);
+            XStringFormat format = new XStringFormat();
+            format.Alignment = XStringAlignment.Near;
+            gfx.DrawLine(new XPen(new XColor() { R = 0, G = 0, B = 0 }), 50, 45, 450, 45);
+            gfx.DrawString("Location", fontBold, XBrushes.DarkSlateGray, 65, 50, format);
+            gfx.DrawLine(new XPen(new XColor() { R = 0, G = 0, B = 0 }), 135, 45, 135, 265);
+            gfx.DrawString("Number Of Children", fontBold, XBrushes.DarkSlateGray, 150, 50, format);
+            gfx.DrawLine(new XPen(new XColor() { R = 0, G = 0, B = 0 }), 290, 45, 290, 265);
+            gfx.DrawString("Number Of Deliveries", fontBold, XBrushes.DarkSlateGray, 300, 50, format);
+            gfx.DrawLine(new XPen(new XColor() { R = 0, G = 0, B = 0 }), 50, 70, 450, 70);
         }
 
         private static void GenerateExcelReport()

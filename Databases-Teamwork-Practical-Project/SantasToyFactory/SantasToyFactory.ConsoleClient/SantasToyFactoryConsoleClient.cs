@@ -159,7 +159,6 @@
         public static void DrawText(XGraphics gfx, int number, PdfDocument d)
         {
             const string facename = "Times New Roman";
-            //XPdfFontOptions options = new XPdfFontOptions(PdfFontEncoding.Unicode, PdfFontEmbedding.Always);
             XPdfFontOptions options = new XPdfFontOptions(PdfFontEncoding.WinAnsi, PdfFontEmbedding.Default);
             XFont fontRegular = new XFont(facename, 9, XFontStyle.Regular, options);
             XFont fontBold = new XFont(facename, 14, XFontStyle.Bold, options);

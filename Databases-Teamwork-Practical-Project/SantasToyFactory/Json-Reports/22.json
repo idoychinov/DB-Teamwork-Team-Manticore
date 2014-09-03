@@ -1,6 +1,7 @@
 {
   "toy-id": 22,
   "name": "Mindflex",
-  "price": 0.00,
-  "toy-description": "Using advanced technology, a wireless EEG headset reads your brainwave activity and uses it to guide a blue Mindflex ball through a series of obstacles"
+  "price": 19.00,
+  "toy-description": "Using advanced technology, a wireless EEG headset reads your brainwave activity and uses it to guide a blue Mindflex ball through a series of obstacles",
+  "toy-producer": "Pepper Minstix"
 }

@@ -8,9 +8,11 @@ namespace SantasToyFactory.MySqlConnector
 {
     public class ToyReport
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
 
         public string Name { get; set; }
+
+        public string Producer { get; set; }
 
         public decimal Price { get; set; }
 

@@ -1,6 +1,7 @@
 {
   "toy-id": 25,
   "name": "Furby",
-  "price": 0.00,
-  "toy-description": "ech-toy market"
+  "price": 21.35,
+  "toy-description": "ech-toy market",
+  "toy-producer": "Sugarplum Mary"
 }

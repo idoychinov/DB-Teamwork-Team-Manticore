@@ -13,6 +13,8 @@
 
         public int ProducerId { get; set; }
 
+        public virtual Producer Producer { get; set; }
+
         public int ToyTypeId { get; set; }
 
         public virtual ToyType ToyType { get; set; }

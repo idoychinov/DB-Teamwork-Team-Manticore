@@ -2,5 +2,6 @@
   "toy-id": 3,
   "name": "Zhu Zhu",
   "price": 10.00,
-  "toy-description": "robotic hamsters"
+  "toy-description": "robotic hamsters",
+  "toy-producer": "Bushy Evergreen"
 }

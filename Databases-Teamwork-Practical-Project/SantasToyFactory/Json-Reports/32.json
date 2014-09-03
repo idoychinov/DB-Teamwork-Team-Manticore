@@ -1,6 +1,7 @@
 {
   "toy-id": 32,
   "name": "Little Tikes Log Cabin",
-  "price": 0.00,
-  "toy-description": "playhouse"
+  "price": 38.00,
+  "toy-description": "playhouse",
+  "toy-producer": "Alabaster Snowball"
 }

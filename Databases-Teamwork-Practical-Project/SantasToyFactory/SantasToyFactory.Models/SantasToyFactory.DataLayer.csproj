@@ -86,7 +86,7 @@
       <Name>SantasToyFactory.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\SantasToyFactory.DataOperations\SantasToyFactory.DataOperations.csproj">
-      <Project>{9EB64DCF-3E32-491B-B549-DF8D89008E39}</Project>
+      <Project>{9eb64dcf-3e32-491b-b549-df8d89008e39}</Project>
       <Name>SantasToyFactory.DataOperations</Name>
     </ProjectReference>
   </ItemGroup>

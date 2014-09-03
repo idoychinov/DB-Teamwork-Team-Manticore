@@ -39,7 +39,7 @@
 
                 // we will make it as linear flow one after another later
                 ConsoleUtilities.MenuMessage("For testing purposes.\n        Press\n  1 to Initialize MongoDB;\n  2 to Migrate MongoDB to SQL;\n  3 to Read Excel;\n  4 to test SQL standalone initialization; " +
-                    "\n  5 to clear data from MongoDb");
+                    "\n  5 to clear data from MongoDb \n  6 to create Json reports and transfer them to MySql");
                 if (CheckForEsc(out currentKey))
                 {
                     active = false;
@@ -68,12 +68,23 @@
                         var mongoDb = new SantasToyFactoryMongoData();
                         mongoDb.DropCollectionsFromDatabase();
                         break;
+                    case ConsoleKey.NumPad6:
+                    case ConsoleKey.D6:
+                        CreateJsonReports();
+                        break;
 
                     default:
                         ConsoleUtilities.ErrorMessage("Wrong command. Please try again");
                         break;
                 }
             }
+        }
+
+        private static void CreateJsonReports()
+        {
+            var reports = JsonReport.CreateReports();
+            JsonReport.TransferToMySql(reports);
+            ConsoleUtilities.SuccessMessage("Migration completed successfully.");
         }
 
         private static void MigrateMongoToSql()
@@ -113,7 +124,7 @@
             var reportsReader = new DeliveryReportsReader(unpackedLocation);
             var allDeliveries = reportsReader.GetAll();
             var db = InitializeSQL();
-            var countries  =db.Children.All().Select(x => new { childId = x.Id, countryId = x.Adresss.Town.CountryId}).ToList();
+            var countries = db.Children.All().Select(x => new { childId = x.Id, countryId = x.Adresss.Town.CountryId}).ToList();
             foreach (var delivery in allDeliveries)
             {
                 var country = countries.Where(c => c.childId == delivery.ChildId).First().countryId;

@@ -23,23 +23,29 @@
             {
                 while (reader.Read())
                 {
-                    if ((reader.NodeType == XmlNodeType.Element) &&
-                        (reader.Name == "child"))
+                    if ((reader.NodeType == XmlNodeType.Element) && (reader.Name == "child"))
                     {
                         string childName = reader.GetAttribute("name");
-                        do
+                        while (reader.Read())
                         {
-                            reader.Read();
-                        } while (reader.NodeType != XmlNodeType.Element && reader.Name == "behavior");
+                            if (reader.NodeType == XmlNodeType.Element && reader.Name == "behavior")
+                            {
+                                Behavior childbehavior = (Behavior)Enum.Parse(typeof(Behavior), reader.ReadInnerXml());
+                                var child = db.Children.SearchFor(ch => ch.Name == childName).FirstOrDefault();
+                                if (child != null)
+                                {
+                                    child.Behavior = childbehavior;
+                                    db.Children.Update(child);
+                                }
 
-                        Behavior childbehavior = (Behavior)Enum.Parse(typeof(Behavior), reader.Value);
-
-                        var child = db.Children.SearchFor(ch => ch.Name == childName).FirstOrDefault();
-                        child.Behavior = childbehavior;
-                        db.Children.Update(child);
+                                break;
+                            }
+                        }
                     }
                 }
             }
+
+            db.SaveChanges();
         }
     }
 }

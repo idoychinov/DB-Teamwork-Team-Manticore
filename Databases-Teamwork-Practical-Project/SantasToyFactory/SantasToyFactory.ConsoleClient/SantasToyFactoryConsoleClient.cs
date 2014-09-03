@@ -44,10 +44,9 @@
 
             while (active)
             {
-
                 // we will make it as linear flow one after another later
                 ConsoleUtilities.MenuMessage("For testing purposes.\n        Press\n  1 to Initialize MongoDB;\n  2 to Migrate MongoDB to SQL;\n  3 to Read Excel;\n  4 to test SQL standalone initialization; " +
-                    "\n  5 to clear data from MongoDb \n  6 to create Json reports and transfer them to MySql \n  7 to Create XML report \n  8 to Generate Excel report  \n  9 to Generate PDF report");
+                    "\n  5 to clear data from MongoDb \n  6 to create Json reports and transfer them to MySql \n  7 to Create XML report \n  8 to Generate Excel report  \n  9 to Generate PDF report  \n  0 to Load XML data");
                 if (CheckForEsc(out currentKey))
                 {
                     active = false;
@@ -92,11 +91,22 @@
                     case ConsoleKey.D9:
                         GeneratePDFreports();
                         break;
+                    case ConsoleKey.NumPad0:
+                    case ConsoleKey.D0:
+                        LoadXMLData();
+                        break;
                     default:
                         ConsoleUtilities.ErrorMessage("Wrong command. Please try again");
                         break;
                 }
             }
+        }
+
+        private static void LoadXMLData()
+        {
+            var xmlreader = new XMLReader(@"..\..\Children-Behaviors.xml");
+            xmlreader.LoadBehaviorData();
+            ConsoleUtilities.SuccessMessage("Successfully loaded xml data!");
         }
 
         private static void GeneratePDFreports()
@@ -185,7 +195,7 @@
                 var toyReports = mySqlContext.GetAll<ToyReport>().ToList();
                 var excelReportQuery = toyReports.Join(toyProductionDetiles, tr => tr.ID, tpd => tpd.Id,
                     (tr, tpd) => new { tr.ID, tr.Name, tr.Price, tr.Producer, tpd.Quantity, tpd.CommissionPercent });
-                 //   .GroupBy(x => x.Producer)
+                //   .GroupBy(x => x.Producer)
                 //.Sum(x => x.Price*x.Quantity*x.CommissionPercent/100);
                 var a = excelReportQuery.ToList();
             }

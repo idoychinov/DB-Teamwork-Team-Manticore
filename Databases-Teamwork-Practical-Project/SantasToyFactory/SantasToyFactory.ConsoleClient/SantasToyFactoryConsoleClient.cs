@@ -5,6 +5,8 @@
 
     using SantasToyFactory.DataLayer;
     using SantasToyFactory.DataOperations;
+    using SantasToyFactory.SqliteDb;
+    using Telerik.OpenAccess.Exceptions;
 
     public class SantasToyFactoryConsoleClient
     {
@@ -39,7 +41,7 @@
 
                 // we will make it as linear flow one after another later
                 ConsoleUtilities.MenuMessage("For testing purposes.\n        Press\n  1 to Initialize MongoDB;\n  2 to Migrate MongoDB to SQL;\n  3 to Read Excel;\n  4 to test SQL standalone initialization; " +
-                    "\n  5 to clear data from MongoDb \n  6 to create Json reports and transfer them to MySql \n  7 to Create XML report");
+                    "\n  5 to clear data from MongoDb \n  6 to create Json reports and transfer them to MySql \n  7 to Create XML report \n  8 to Generate Excel report");
                 if (CheckForEsc(out currentKey))
                 {
                     active = false;
@@ -72,13 +74,29 @@
                     case ConsoleKey.D6:
                         CreateJsonReports();
                         break;
+                    case ConsoleKey.NumPad7:
                     case ConsoleKey.D7:
                         CreateXMLReports();
+                        break;
+                        case ConsoleKey.NumPad8:
+                        case ConsoleKey.D8:
+                        GenerateExcelReport();
                         break;
                     default:
                         ConsoleUtilities.ErrorMessage("Wrong command. Please try again");
                         break;
                 }
+            }
+        }
+ 
+        private static void GenerateExcelReport()
+        {
+            var sqliteContext = new SantasToyFactorySqliteContext();
+            var sqliteDb = new ToyProductionDetailsRepository(sqliteContext);
+            var toyProductionDetiles = sqliteDb.GetToyProductionDetails();
+            foreach(var item in toyProductionDetiles)
+            {
+                Console.WriteLine(item);
             }
         }
 
@@ -87,7 +105,14 @@
             ChooseServer();
 
             var reports = JsonReport.CreateReports();
-            JsonReport.TransferToMySql(reports);
+            try
+            {
+                JsonReport.TransferToMySql(reports);
+            }
+            catch (DuplicateKeyException e)
+            {
+                ConsoleUtilities.ErrorMessage("Schema with data already exists in MySql.");
+            }
             ConsoleUtilities.SuccessMessage("Reports are created successfully.");
         }
 

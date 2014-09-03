@@ -92,6 +92,10 @@
       <Project>{6f9c2621-695c-4bde-881b-157dcaa75c07}</Project>
       <Name>SantasToyFactory.MySqlConnector</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SantasToyFactory.SqliteDb\SantasToyFactory.SqliteDb.csproj">
+      <Project>{58c2579d-ec69-4357-9e7d-e0c9f20e20a7}</Project>
+      <Name>SantasToyFactory.SqliteDb</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

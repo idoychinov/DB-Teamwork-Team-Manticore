@@ -1,9 +1,11 @@
 ﻿namespace SantasToyFactory.ConsoleClient
 {
     using System;
+    using System.Linq;
     using System.Xml;
 
     using SantasToyFactory.DataLayer;
+    using SantasToyFactory.Models;
 
     public class XMLReader
     {
@@ -28,20 +30,13 @@
                         do
                         {
                             reader.Read();
-                        } while (reader.NodeType != "behavior");
+                        } while (reader.NodeType != XmlNodeType.Element && reader.Name == "behavior");
 
-                        
-                    }
-                }
-            }
-            
-            using (XmlReader reader = XmlReader.Create("../../library.xml"))
-            {
-                while (reader.Read())
-                {
-                    if (reader.NodeType == XmlNodeType.Element)
-                    {
-                        Console.WriteLine(reader.Name);
+                        Behavior childbehavior = (Behavior)Enum.Parse(typeof(Behavior), reader.Value);
+
+                        var child = db.Children.SearchFor(ch => ch.Name == childName).FirstOrDefault();
+                        child.Behavior = childbehavior;
+                        db.Children.Update(child);
                     }
                 }
             }

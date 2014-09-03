@@ -1,12 +1,13 @@
 ﻿namespace SantasToyFactory.Models
 {
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
 
-    public  class Town
+    public class Town
     {
-       public ICollection<Address> addresses;
+        private ICollection<Address> addresses;
 
-         public Town()
+        public Town()
         {
             this.addresses = new HashSet<Address>();
         }
@@ -17,6 +18,7 @@
 
         public string PostCode { get; set; }
 
+        [ForeignKey("Country")]
         public int CountryId { get; set; }
 
         public virtual Country Country { get; set; }

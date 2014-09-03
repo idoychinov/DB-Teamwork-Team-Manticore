@@ -1,6 +1,6 @@
 ﻿namespace SantasToyFactory.Models
 {
-    public enum Behaivior
+    public enum Behavior
     {
         Criminal = 1,
         VeryBad= 2,

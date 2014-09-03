@@ -14,15 +14,15 @@
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
 
-            using(connection)
-	        {
-		        foreach (var path in excelFiles)
+            using (connection)
+            {
+                foreach (var path in excelFiles)
                 {
-                    string oleDbConnection = GetConnectionString(path);
-                    using (OleDbConnection conn = new OleDbConnection(oleDbConnection))
+                    string oleDbConnectionString = GetConnectionString(path);
+                    OleDbConnection conn = new OleDbConnection(oleDbConnectionString);
+                    conn.Open();
+                    using (conn)
                     {
-                        conn.Open();
-                        
                         OleDbCommand getTable = new OleDbCommand("SELECT * FROM [Delivery$]", conn);
                         OleDbDataReader reader = getTable.ExecuteReader();
 
@@ -30,19 +30,20 @@
                         {
                             double yearId = (double)reader["YearId"];
                             double delivererId = (double)reader["DelivererId"];
-                            string query = "INSERT Deliveries(YearId, DelivererId) VALUES ( @yearId, @delivererId)";
+                            double toyId = (double)reader["ToyId"];
+                            string query = "INSERT Deliveries(YearId, DelivererId, ToyId) VALUES ( @yearId, @delivererId, @toyId)";
                             SqlCommand insertProduct = new SqlCommand(query, connection);
 
                             insertProduct.Parameters.AddWithValue("@yearId", yearId);
                             insertProduct.Parameters.AddWithValue("@delivererId", delivererId);
+                            insertProduct.Parameters.AddWithValue("@toyId", toyId);
                             insertProduct.ExecuteNonQuery();
                         }
 
                         conn.Close();
                     }
                 }
-	        }
-            
+            }
         }
 
         private static string GetConnectionString(string fileName)

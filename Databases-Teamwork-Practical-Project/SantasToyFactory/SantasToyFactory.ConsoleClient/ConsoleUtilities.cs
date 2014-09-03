@@ -4,7 +4,6 @@
 
     public static class ConsoleUtilities
     {
-
         const ConsoleColor ConsoleMenuColor = ConsoleColor.Cyan;
         const ConsoleColor ConsoleErrorColor = ConsoleColor.Red;
         const ConsoleColor ConsoleSuccessColor = ConsoleColor.Green;

@@ -4,12 +4,13 @@
 
     public class Country
     {
-        public ICollection<Town> towns;
+        private ICollection<Town> towns;
 
         public Country()
         {
             this.towns = new HashSet<Town>();
         }
+
         public int Id { get; set; }
 
         public string Name { get; set; }

@@ -1,21 +1,17 @@
 ﻿namespace SantasToyFactory.Models
 {
     using System.Collections.Generic;
-    public class Child        
-    {
-    //    private ICollection<Delivery> deliveries;
-    //    public Child()
-    //    {
-    //        this.deliveries = new HashSet<Delivery>();
-    //    }
+    using System.ComponentModel.DataAnnotations.Schema;
 
+    public class Child
+    {
         public int Id { get; set; }
 
         public string Name { get; set; }
 
         public GroupAge GroupAge { get; set; }
 
-        public Behaivior Behaviour { get; set; }
+        public virtual Behavior Behavior { get; set; }
 
         public int AddressId { get; set; }
 

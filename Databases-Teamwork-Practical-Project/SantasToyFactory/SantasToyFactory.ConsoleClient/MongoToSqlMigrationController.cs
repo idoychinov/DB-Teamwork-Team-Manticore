@@ -26,18 +26,21 @@
             {
                 this.sqlDb.Countries.Add(item);
             }
+            this.sqlDb.SaveChanges();
 
             var townsCollection = this.mongoDB.GetTowns();
             foreach (var item in townsCollection)
             {
                 this.sqlDb.Towns.Add(item);
             }
+            this.sqlDb.SaveChanges();
+
             var addressesCollection = this.mongoDB.GetAddresses();
             foreach (var item in addressesCollection)
             {
                 this.sqlDb.Addresses.Add(item);
             }
-
+            this.sqlDb.SaveChanges();
             var toyTypesCollection = this.mongoDB.GetToyTypes();
             foreach (var item in toyTypesCollection)
             {

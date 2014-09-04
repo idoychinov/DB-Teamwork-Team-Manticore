@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<behaviors-by-children>
+  <country name="Chinasmall">
+    <child name="Kathie Flood">
+      <behavior>Good</behavior>
+    </child>
+    <child name="Barbara Decker">
+      <behavior>VeryGood</behavior>
+    </child>
+    <child name="Mindaugas Krapauskas">
+      <behavior>Criminal</behavior>
+    </child>
+    <child name="Diane Margheim">
+      <behavior>Angel</behavior>
+    </child>
+    <child name="Janaina Bueno">
+      <behavior>Bad</behavior>
+    </child>
+    <child name="Syed Abbas">
+      <behavior>VeryBad</behavior>
+    </child>
+    <child name="Jian Shuo Wang">
+      <behavior>Excellent</behavior>
+    </child>
+    <child name="Randy Reeves">
+      <behavior>Good</behavior>
+    </child>
+    <child name="John Campbell">
+      <behavior>Excellent</behavior>
+    </child>
+    <child name="Eric Brown">
+      <behavior>VeryBad</behavior>
+    </child>
+    <child name="Brian Goldstein">
+      <behavior>Excellent</behavior>
+    </child>
+    <child name="Elizabeth Keyser">
+      <behavior>Angel</behavior>
+    </child>
+    <child name="Grant Culbertson">
+      <behavior>Good</behavior>
+    </child>
+    <child name="Barbara Moreland">
+      <behavior>Criminal</behavior>
+    </child>
+    <child name="Denise Smith">
+      <behavior>Excellent</behavior>
+    </child>
+    <child name="Yuhong Li">
+      <behavior>Excellent</behavior>
+    </child>
+    <child name="Jill Williams">
+      <behavior>Excellent</behavior>
+    </child>
+    <child name="Pete Male">
+      <behavior>Good</behavior>
+    </child>
+    <child name="Laura Steele">
+      <behavior>Good</behavior>
+    </child>
+    <child name="Carole Poland">
+      <behavior>Good</behavior>
+    </child>
+    <child name="David Campbell">
+      <behavior>Good</behavior>
+    </child>
+    <child name="Sariya Harnpadoungsataya">
+      <behavior>Good</behavior>
+    </child>
+    <child name="Stephen Jiang">
+      <behavior>Good</behavior>
+    </child>
+    <child name="Ashvini Sharma">
+      <behavior>Good</behavior>
+    </child>
+    <child name="Krishna Sunkammurali">
+      <behavior>VeryBad</behavior>
+    </child>
+    <child name="Jossef Goldberg">
+      <behavior>Good</behavior>
+    </child>
+    <child name="Gordon Hee">
+      <behavior>VeryBad</behavior>
+    </child>
+    <child name="Bryan Baker">
+      <behavior>VeryBad</behavior>
+    </child>
+    <child name="David Barber">
+      <behavior>VeryBad</behavior>
+    </child>
+    <child name="Zainal Arifin">
+      <behavior>VeryBad</behavior>
+    </child>
+    <child name="Gary Yukish">
+      <behavior>VeryBad</behavior>
+    </child>
+    <child name="Jae Pak">
+      <behavior>VeryBad</behavior>
+    </child>
+    <child name="Christian Kleinerman">
+      <behavior>VeryBad</behavior>
+    </child>
+    <child name="John Wood">
+      <behavior>Angel</behavior>
+    </child>
+    <child name="Mark Harrington">
+      <behavior>Angel</behavior>
+    </child>
+    <child name="William Vong">
+      <behavior>Angel</behavior>
+    </child>
+    <child name="Linda Moschell">
+      <behavior>Angel</behavior>
+    </child>
+    <child name="Kevin Liu">
+      <behavior>Angel</behavior>
+    </child>
+    <child name="Garrett Vargas">
+      <behavior>Angel</behavior>
+    </child>
+    <child name="Jinghao Liu">
+      <behavior>Angel</behavior>
+    </child>
+    <child name="Jo Berry">
+      <behavior>Angel</behavior>
+    </child>
+    <child name="Hanying Feng">
+      <behavior>Angel</behavior>
+    </child>
+    <child name="Jillian Carson">
+      <behavior>Angel</behavior>
+    </child>
+    <child name="Simon Rapier">
+      <behavior>Angel</behavior>
+    </child>
+    <child name="Stuart Macrae">
+      <behavior>Angel</behavior>
+    </child>
+    <child name="Stuart Munson">
+      <behavior>Angel</behavior>
+    </child>
+    <child name="Erin Hagens">
+      <behavior>Angel</behavior>
+    </child>
+    <child name="Kevin Brown">
+      <behavior>Angel</behavior>
+    </child>
+    <child name="Betsy Stadick">
+      <behavior>VeryGood</behavior>
+    </child>
+    <child name="Merav Netz">
+      <behavior>VeryGood</behavior>
+    </child>
+    <child name="Belinda Newman">
+      <behavior>VeryGood</behavior>
+    </child>
+    <child name="Dragan Tomic">
+      <behavior>VeryGood</behavior>
+    </child>
+    <child name="Alex Nayberg">
+      <behavior>VeryGood</behavior>
+    </child>
+    <child name="Benjamin Martin">
+      <behavior>VeryGood</behavior>
+    </child>
+    <child name="Jeff Hay">
+      <behavior>VeryGood</behavior>
+    </child>
+  </country>
+  <country name="Indiahover">
+    <child name="Karen Berg">
+      <behavior>Good</behavior>
+    </child>
+    <child name="Tawana Nusbaum">
+      <behavior>Good</behavior>
+    </child>
+    <child name="Michael Patten">
+      <behavior>Good</behavior>
+    </child>
+    <child name="Frank Lee">
+      <behavior>Good</behavior>
+    </child>
+    <child name="Michael Rothkugel">
+      <behavior>Good</behavior>
+    </child>
+    <child name="David Yalovsky">
+      <behavior>Good</behavior>
+    </child>
+    <child name="Deborah Poe">
+      <behavior>Good</behavior>
+    </child>
+    <child name="Shu Ito">
+      <behavior>Good</behavior>
+    </child>
+    <child name="Russell Hunter">
+      <behavior>Bad</behavior>
+    </child>
+    <child name="Janice Galvin">
+      <behavior>Bad</behavior>
+    </child>
+    <child name="Ivo Salmre">
+      <behavior>Bad</behavior>
+    </child>
+    <child name="Christopher Hill">
+      <behavior>Bad</behavior>
+    </child>
+    <child name="Ruth Ellerbrock">
+      <behavior>Bad</behavior>
+    </child>
+    <child name="Bonnie Kearney">
+      <behavior>Bad</behavior>
+    </child>
+    <child name="Jan Miksovsky">
+      <behavior>Bad</behavior>
+    </child>
+    <child name="Andrew Hill">
+      <behavior>Bad</behavior>
+    </child>
+    <child name="Alan Brewer">
+      <behavior>Bad</behavior>
+    </child>
+    <child name="Shane Kim">
+      <behavior>Bad</behavior>
+    </child>
+    <child name="Britta Simon">
+      <behavior>Angel</behavior>
+    </child>
+    <child name="Sean Chai">
+      <behavior>Angel</behavior>
+    </child>
+    <child name="Ken Sanchez">
+      <behavior>Angel</behavior>
+    </child>
+    <child name="Rajesh Patel">
+      <behavior>Angel</behavior>
+    </child>
+    <child name="John Chen">
+      <behavior>Angel</behavior>
+    </child>
+    <child name="Samantha Smithv">
+      <behavior>Angel</behavior>
+    </child>
+  </country>
+  <country name="Usatown">
+    <child name="Nicole Holliday">
+      <behavior>VeryBad</behavior>
+    </child>
+    <child name="David Lawrence">
+      <behavior>Good</behavior>
+    </child>
+    <child name="James Hamilton">
+      <behavior>Good</behavior>
+    </child>
+    <child name="Brian Lloyd">
+      <behavior>Criminal</behavior>
+    </child>
+    <child name="Jason Watters">
+      <behavior>Criminal</behavior>
+    </child>
+  </country>
+  <country name="Southbourder">
+    <child name="Mandar Samant">
+      <behavior>Good</behavior>
+    </child>
+    <child name="Andy Ruth">
+      <behavior>Good</behavior>
+    </child>
+    <child name="Houman Pournasseh">
+      <behavior>Good</behavior>
+    </child>
+    <child name="Diane Tibbott">
+      <behavior>Good</behavior>
+    </child>
+    <child name="David Hamilton">
+      <behavior>Bad</behavior>
+    </child>
+    <child name="Kok-Ho Loh">
+      <behavior>Good</behavior>
+    </child>
+    <child name="Fred Northup">
+      <behavior>Good</behavior>
+    </child>
+    <child name="Michael Sullivan">
+      <behavior>Bad</behavior>
+    </child>
+    <child name="Paul Komosinski">
+      <behavior>Bad</behavior>
+    </child>
+    <child name="Patrick Cook">
+      <behavior>Bad</behavior>
+    </child>
+    <child name="Barry Johnson">
+      <behavior>Bad</behavior>
+    </child>
+    <child name="Hung-Fu Ting">
+      <behavior>Bad</behavior>
+    </child>
+    <child name="Brenda Diaz">
+      <behavior>Bad</behavior>
+    </child>
+    <child name="Lori Kane">
+      <behavior>Bad</behavior>
+    </child>
+  </country>
+</behaviors-by-children>

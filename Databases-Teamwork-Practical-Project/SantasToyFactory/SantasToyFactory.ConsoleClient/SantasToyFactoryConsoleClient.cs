@@ -3,13 +3,13 @@
     using System;
     using System.Linq;
     using System.Data.SQLite.EF6;
+    using Telerik.OpenAccess.Exceptions;
 
     using SantasToyFactory.DataLayer;
     using SantasToyFactory.DataOperations;
     using SantasToyFactory.Models;
     using SantasToyFactory.MySqlConnector;
     using SantasToyFactory.SqliteDb;
-    using Telerik.OpenAccess.Exceptions;
 
     public class SantasToyFactoryConsoleClient
     {
@@ -100,11 +100,17 @@
                 var sqliteDb = new ToyProductionDetailsRepository(sqliteContext);
                 var toyProductionDetiles = sqliteDb.GetToyProductionDetails().ToList();
                 var toyReports = mySqlContext.GetAll<ToyReport>().ToList();
-                var excelReportQuery = toyReports.Join(toyProductionDetiles, tr => tr.ID, tpd => tpd.Id,
-                    (tr, tpd) => new { tr.ID, tr.Name, tr.Price, tr.Producer, tpd.Quantity, tpd.CommissionPercent });
-                 //   .GroupBy(x => x.Producer)
-                //.Sum(x => x.Price*x.Quantity*x.CommissionPercent/100);
-                var a = excelReportQuery.ToList();
+
+                try
+                {
+                    ExcelWriter.GenerateProductionCostsFile(@"..\..\..\GeneratedReport\ProductionCostsReport.xlsx", toyReports, toyProductionDetiles);
+                    ConsoleUtilities.SuccessMessage(string.Format("Excel Report generated successfully"));
+                }
+                catch (Exception e)
+                {
+                        ConsoleUtilities.ErrorMessage(string.Format("Error generating excel reports {0}",e));
+
+                }
             }
         }
 
@@ -117,7 +123,7 @@
             {
                 JsonReport.TransferToMySql(reports);
             }
-            catch (DuplicateKeyException e)
+            catch (DuplicateKeyException)
             {
                 ConsoleUtilities.ErrorMessage("Schema with data already exists in MySql.");
             }

@@ -13,15 +13,18 @@
         public DateTime Date { get; set; }
 
         public int ChildId { get; set; }
+
+        
+        public virtual Child Child { get; set; }
         
         public int DelivererId { get; set; }
 
-        [ForeignKey("Toy")]
+
         public int ToyId { get; set; }
 
         public virtual Toy Toy { get; set; }
 
-
+        
         public int CountryId { get; set; }
 
 		public virtual Country Country { get; set; }

@@ -21,48 +21,69 @@
 
         public void MigrateDataToSql()
         {
-            var countriesCollection = this.mongoDB.GetCountries();
-            foreach (var item in countriesCollection)
-            {
-                this.sqlDb.Countries.Add(item);
-            }
-            this.sqlDb.SaveChanges();
 
-            var townsCollection = this.mongoDB.GetTowns();
-            foreach (var item in townsCollection)
+            if (sqlDb.Countries.All().Count() == 0)
             {
-                this.sqlDb.Towns.Add(item);
-            }
-            this.sqlDb.SaveChanges();
-
-            var addressesCollection = this.mongoDB.GetAddresses();
-            foreach (var item in addressesCollection)
-            {
-                this.sqlDb.Addresses.Add(item);
-            }
-            this.sqlDb.SaveChanges();
-            var toyTypesCollection = this.mongoDB.GetToyTypes();
-            foreach (var item in toyTypesCollection)
-            {
-                this.sqlDb.ToyTypes.Add(item);
+                var countriesCollection = this.mongoDB.GetCountries();
+                foreach (var item in countriesCollection)
+                {
+                    this.sqlDb.Countries.Add(item);
+                }
             }
 
-            var produecersCollection = this.mongoDB.GetProducers();
-            foreach (var item in produecersCollection)
+            if (sqlDb.Towns.All().Count() == 0)
             {
-                this.sqlDb.Producers.Add(item);
+                var townsCollection = this.mongoDB.GetTowns();
+                foreach (var item in townsCollection)
+                {
+                    this.sqlDb.Towns.Add(item);
+                }
             }
 
-            var toysCollection = this.mongoDB.GetToys();
-            foreach (var item in toysCollection)
+            if (sqlDb.Addresses.All().Count() == 0)
             {
-                this.sqlDb.Toys.Add(item);
+                var addressesCollection = this.mongoDB.GetAddresses();
+                foreach (var item in addressesCollection)
+                {
+                    this.sqlDb.Addresses.Add(item);
+                }
             }
 
-            var childrenCollection = this.mongoDB.GetChildren();
-            foreach (var item in childrenCollection)
+            if (sqlDb.ToyTypes.All().Count() == 0)
             {
-                this.sqlDb.Children.Add(item);
+                var toyTypesCollection = this.mongoDB.GetToyTypes();
+                foreach (var item in toyTypesCollection)
+                {
+                    this.sqlDb.ToyTypes.Add(item);
+                }
+            }
+
+
+            if (sqlDb.Producers.All().Count() == 0)
+            {
+                var produecersCollection = this.mongoDB.GetProducers();
+                foreach (var item in produecersCollection)
+                {
+                    this.sqlDb.Producers.Add(item);
+                }
+            }
+
+            if (sqlDb.Toys.All().Count() == 0)
+            {
+                var toysCollection = this.mongoDB.GetToys();
+                foreach (var item in toysCollection)
+                {
+                    this.sqlDb.Toys.Add(item);
+                }
+            }
+
+            if (sqlDb.Children.All().Count() == 0)
+            {
+                var childrenCollection = this.mongoDB.GetChildren();
+                foreach (var item in childrenCollection)
+                {
+                    this.sqlDb.Children.Add(item);
+                }
             }
 
             this.sqlDb.SaveChanges();

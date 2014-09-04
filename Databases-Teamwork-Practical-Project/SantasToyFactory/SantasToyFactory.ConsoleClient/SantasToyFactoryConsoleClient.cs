@@ -18,13 +18,84 @@
     {
         static void Main()
         {
-            MainMenu();
+            ConsoleUtilities.MenuMessage("For step by step execution press 1. Press any other key for testing main menu.");
+            ConsoleKey currentKey = Console.ReadKey(true).Key;
+            if (currentKey == ConsoleKey.NumPad1 || currentKey == ConsoleKey.D1)
+            {
+                StepByStepExecution();
+            }
+            else
+            {
+                MainMenu();
+            }
+        }
+
+        private static void StepByStepExecution()
+        {
+            ChooseServer();
+            ConsoleUtilities.MenuMessage("Press any key to initialize MongoDb");
+            Console.ReadKey(true);
+            var mongoDb = InitializeMongo();
+
+            ConsoleUtilities.MenuMessage("Press any key to start MongoDb to SQL migration");
+            Console.ReadKey(true);
+            Console.WriteLine();
+            var sqlDb = new SantasToyFactoryDatabase();
+            try
+            {
+                ConsoleUtilities.ProcessingMessage("Beginning data migration from MongoDb to SQL database");
+                var migrationControler = new MongoToSqlMigrationController(mongoDb, sqlDb);
+                migrationControler.MigrateDataToSql();
+                ConsoleUtilities.SuccessMessage("Migration completed successfully.");
+            }
+            catch (Exception e)
+            {
+                ConsoleUtilities.ErrorMessage(String.Format("Error during data migration: {0}", e));
+            }
+
+
+            ConsoleUtilities.MenuMessage("Press any key to view sample data");
+            Console.ReadKey(true);
+            foreach (var toy in sqlDb.Toys.All().ToList())
+            {
+                Console.WriteLine("Toy: {0}, Type: {1}, Producer: {2}", toy.Name, toy.ToyType.GroupAge, toy.Producer.Name);
+            }
+
+            ConsoleUtilities.MenuMessage("Press any key to read excel delivery reports");
+            Console.ReadKey(true);
+            ReadExcel(sqlDb);
+
+            ConsoleUtilities.MenuMessage("Press any key to view sample data");
+            Console.ReadKey(true);
+            foreach (var delivery in sqlDb.Deliveries.All().ToList())
+            {
+                Console.WriteLine("{0} received {1} {2}, at {3}", delivery.Child.Name, delivery.Quantity, delivery.Toy.Name, delivery.Date);
+            }
+
+            ConsoleUtilities.MenuMessage("Press any key to generate PDF Reports");
+            Console.ReadKey(true);
+            GeneratePDFreports(sqlDb);
+
+            ConsoleUtilities.MenuMessage("Press any key to generate XML Reports");
+            Console.ReadKey(true);
+            CreateXMLReports();
+
+            ConsoleUtilities.MenuMessage("Press any key to generate Json Reports");
+            Console.ReadKey(true);
+            CreateJsonReports();
+
+            ConsoleUtilities.MenuMessage("Press any key to load data from XML");
+            Console.ReadKey(true);
+            LoadXMLData(sqlDb);
+
+            ConsoleUtilities.MenuMessage("Press any key to generate excel report");
+            Console.ReadKey(true);
+            GenerateExcelReport();
         }
 
         private static bool CheckForEsc(out ConsoleKey pressedKey)
         {
-            pressedKey = Console.ReadKey().Key;
-            Console.WriteLine();
+            pressedKey = Console.ReadKey(true).Key;
             if (pressedKey == ConsoleKey.Escape)
             {
                 ConsoleUtilities.ProcessingMessage("Thank you for using Santa's Toy Factory Data System. Good bye and Ho Ho Ho!");
@@ -64,7 +135,7 @@
                         break;
                     case ConsoleKey.NumPad3:
                     case ConsoleKey.D3:
-                        ReadExcel();
+                        ReadExcel(InitializeSQL());
                         break;
                     case ConsoleKey.NumPad4:
                     case ConsoleKey.D4:
@@ -81,6 +152,7 @@
                         break;
                     case ConsoleKey.NumPad7:
                     case ConsoleKey.D7:
+                        ChooseServer();
                         CreateXMLReports();
                         break;
                     case ConsoleKey.NumPad8:
@@ -89,11 +161,11 @@
                         break;
                     case ConsoleKey.NumPad9:
                     case ConsoleKey.D9:
-                        GeneratePDFreports();
+                        GeneratePDFreports(InitializeSQL());
                         break;
                     case ConsoleKey.NumPad0:
                     case ConsoleKey.D0:
-                        LoadXMLData();
+                        LoadXMLData(InitializeSQL());
                         break;
                     default:
                         ConsoleUtilities.ErrorMessage("Wrong command. Please try again");
@@ -102,17 +174,15 @@
             }
         }
 
-        private static void LoadXMLData()
+        private static void LoadXMLData(SantasToyFactoryDatabase db)
         {
-            var xmlreader = new XMLReader(@"..\..\Children-Behaviors.xml");
+            var xmlreader = new XMLReader(@"..\..\..\Children-Behaviors.xml", db);
             xmlreader.LoadBehaviorData();
             ConsoleUtilities.SuccessMessage("Successfully loaded xml data!");
         }
 
-        private static void GeneratePDFreports()
+        private static void GeneratePDFreports(SantasToyFactoryDatabase db)
         {
-            var mongoDb = new SantasToyFactoryMongoData();
-            var db = InitializeSQL();
             var report = new PdfDocument();
             //report.Info.Title = "PDF export try";
             PdfPage page = report.AddPage();
@@ -127,13 +197,14 @@
             int horizontalThird = 295;
             int vertical = 75;
             var locations = db.Countries.All();
-            foreach (var item in locations)
+            var query = db.Deliveries.All().GroupBy(x => new { Country = x.Country.Name, Toy = x.Toy.Name }).Select(g =>
+                new { CountryName = g.Key.Country, ToyName = g.Key.Toy, Deliveries = g.Count() });
+            foreach (var item in query)
             {
-                var children = db.Children.All().Where(x => x.Adresss.Town.Country == item).Count();  // + .Select(x => x.Name)
-                var deliveries = db.Deliveries.All().Where(x => x.CountryId == item.Id).Count();
-                gfx.DrawString(item.Name, new XFont("Times New Roman", 9, XFontStyle.Regular, new XPdfFontOptions(PdfFontEncoding.WinAnsi, PdfFontEmbedding.Default)), XBrushes.DarkSlateGray, horizontalFirst, vertical, format);
-                gfx.DrawString(children.ToString(), new XFont("Times New Roman", 9, XFontStyle.Regular, new XPdfFontOptions(PdfFontEncoding.WinAnsi, PdfFontEmbedding.Default)), XBrushes.DarkSlateGray, horizontalSecond, vertical, format);
-                gfx.DrawString(deliveries.ToString(), new XFont("Times New Roman", 9, XFontStyle.Regular, new XPdfFontOptions(PdfFontEncoding.WinAnsi, PdfFontEmbedding.Default)), XBrushes.DarkSlateGray, horizontalThird, vertical, format);
+
+                gfx.DrawString(item.CountryName, new XFont("Times New Roman", 9, XFontStyle.Regular, new XPdfFontOptions(PdfFontEncoding.WinAnsi, PdfFontEmbedding.Default)), XBrushes.DarkSlateGray, horizontalFirst, vertical, format);
+                gfx.DrawString(item.ToyName.ToString(), new XFont("Times New Roman", 9, XFontStyle.Regular, new XPdfFontOptions(PdfFontEncoding.WinAnsi, PdfFontEmbedding.Default)), XBrushes.DarkSlateGray, horizontalSecond, vertical, format);
+                gfx.DrawString(item.Deliveries.ToString(), new XFont("Times New Roman", 9, XFontStyle.Regular, new XPdfFontOptions(PdfFontEncoding.WinAnsi, PdfFontEmbedding.Default)), XBrushes.DarkSlateGray, horizontalThird, vertical, format);
 
                 vertical += 25;
             }
@@ -145,7 +216,7 @@
             gfx.DrawLine(new XPen(new XColor() { R = 0, G = 0, B = 0 }), 50, vertical, 450, vertical);
 
             report.Save(@"../../../PDF reports/test-report.pdf");
-            //Process.Start(@"../../test-report.pdf");
+            ConsoleUtilities.SuccessMessage("Report is created successfully.");
         }
 
         public static void DrawTitle(PdfDocument report, PdfPage page, XGraphics gfx, string title)
@@ -179,7 +250,7 @@
             gfx.DrawLine(new XPen(new XColor() { R = 0, G = 0, B = 0 }), 50, 45, 450, 45);
             gfx.DrawString("Location", fontBold, XBrushes.DarkSlateGray, 65, 50, format);
             gfx.DrawLine(new XPen(new XColor() { R = 0, G = 0, B = 0 }), 135, 45, 135, 265);
-            gfx.DrawString("Number Of Children", fontBold, XBrushes.DarkSlateGray, 150, 50, format);
+            gfx.DrawString("Toy Name", fontBold, XBrushes.DarkSlateGray, 150, 50, format);
             gfx.DrawLine(new XPen(new XColor() { R = 0, G = 0, B = 0 }), 290, 45, 290, 265);
             gfx.DrawString("Number Of Deliveries", fontBold, XBrushes.DarkSlateGray, 300, 50, format);
             gfx.DrawLine(new XPen(new XColor() { R = 0, G = 0, B = 0 }), 50, 70, 450, 70);
@@ -201,7 +272,7 @@
                 }
                 catch (Exception e)
                 {
-                        ConsoleUtilities.ErrorMessage(string.Format("Error generating excel reports {0}",e));
+                    ConsoleUtilities.ErrorMessage(string.Format("Error generating excel reports {0}", e));
 
                 }
             }
@@ -209,8 +280,6 @@
 
         private static void CreateJsonReports()
         {
-            ChooseServer();
-
             var reports = JsonReport.CreateReports();
             try
             {
@@ -233,8 +302,7 @@
         private static void ChooseServer()
         {
             ConsoleUtilities.MenuMessage("Press 1 for SQL Server or any other key for SQL Express");
-            var key = Console.ReadKey();
-            Console.WriteLine();
+            var key = Console.ReadKey(true);
             if (key.Key == ConsoleKey.NumPad1 || key.Key == ConsoleKey.D1)
             {
                 SantasToyFactorySqlContext.InitializeForSqlServer();
@@ -263,14 +331,14 @@
             }
         }
 
-        private static void ReadExcel()
+        private static void ReadExcel(SantasToyFactoryDatabase db)
         {
             const string archiveLocation = @"../../../Delivery Reports.zip";
             const string unpackedLocation = @"../../../ExtractedExcelReports";
+            ConsoleUtilities.ProcessingMessage("Beginning to unzip and read data and load it to SQL server");
             ZipManipulator.ExtractFile(archiveLocation, unpackedLocation);
             var reportsReader = new DeliveryReportsReader(unpackedLocation);
             var allDeliveries = reportsReader.GetAll();
-            var db = InitializeSQL();
             var countries = db.Children.All().Select(x => new { childId = x.Id, countryId = x.Adresss.Town.CountryId }).ToList();
             foreach (var delivery in allDeliveries)
             {
@@ -279,22 +347,24 @@
                 db.Deliveries.Add(delivery);
             }
             db.SaveChanges();
+            ConsoleUtilities.SuccessMessage("Data load compleated successfuly.");
+
             //ExcelManipulator.AddExcelInfoToDatabase("Server = .; Database = SantasToyFactoryDb; Integrated Security = true", excelFiles);
             //ExcelManipulator.AddExcelInfoToDatabase("Server = .\\SQLEXPRESS; Database = SantasToyFactoryDb; Integrated Security = true", excelFiles);
         }
 
-        private static void InitializeMongo()
+        private static SantasToyFactoryMongoData InitializeMongo()
         {
             ConsoleUtilities.ProcessingMessage("Initializing MongoDb database");
             var mongoDb = new SantasToyFactoryMongoData();
             ConsoleUtilities.SuccessMessage("Database initialized successfully.");
+            return mongoDb;
         }
 
         private static SantasToyFactoryDatabase InitializeSQL()
         {
             ConsoleUtilities.MenuMessage("Press 1 for SQL Server or any other key for SQL Express");
-            var key = Console.ReadKey();
-            Console.WriteLine();
+            var key = Console.ReadKey(true);
             if (key.Key == ConsoleKey.NumPad1 || key.Key == ConsoleKey.D1)
             {
                 SantasToyFactorySqlContext.InitializeForSqlServer();
@@ -310,10 +380,7 @@
             {
 
                 var test = db.Deliverers.SearchFor(d => d.Id == 1).First().Name;
-
                 ConsoleUtilities.SuccessMessage("Database initialized successfully.");
-                Console.WriteLine("First deer name is: {0}", test);
-                db.SaveChanges();
             }
             catch (Exception e)
             {

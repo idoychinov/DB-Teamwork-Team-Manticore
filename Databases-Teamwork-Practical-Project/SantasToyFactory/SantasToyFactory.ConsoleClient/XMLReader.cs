@@ -9,17 +9,21 @@
 
     public class XMLReader
     {
-        public XMLReader(string filePath)
+        private SantasToyFactoryDatabase context;
+
+        public XMLReader(string filePath, SantasToyFactoryDatabase db)
         {
             this.FilePath = filePath;
+            this.context = db;
         }
+
 
         public string FilePath { get; set; }
 
         public void LoadBehaviorData()
         {
-            var db = new SantasToyFactoryDatabase();
-            using (XmlReader reader = XmlReader.Create("../../Children-Behaviors.xml"))
+            var context = new SantasToyFactoryDatabase();
+            using (XmlReader reader = XmlReader.Create(this.FilePath))
             {
                 while (reader.Read())
                 {
@@ -31,11 +35,11 @@
                             if (reader.NodeType == XmlNodeType.Element && reader.Name == "behavior")
                             {
                                 Behavior childbehavior = (Behavior)Enum.Parse(typeof(Behavior), reader.ReadInnerXml());
-                                var child = db.Children.SearchFor(ch => ch.Name == childName).FirstOrDefault();
+                                var child = context.Children.SearchFor(ch => ch.Name == childName).FirstOrDefault();
                                 if (child != null)
                                 {
                                     child.Behavior = childbehavior;
-                                    db.Children.Update(child);
+                                    context.Children.Update(child);
                                 }
 
                                 break;
@@ -45,7 +49,7 @@
                 }
             }
 
-            db.SaveChanges();
+            context.SaveChanges();
         }
     }
 }

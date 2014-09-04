@@ -56,5 +56,16 @@
         {
             base.SaveChanges();
         }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Delivery>()
+            .HasRequired(t => t.Child)
+            .WithMany()
+            .HasForeignKey(t=> t.ChildId)
+            .WillCascadeOnDelete(false);
+        }
     }
 }
